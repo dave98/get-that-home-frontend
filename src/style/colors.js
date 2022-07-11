@@ -11,7 +11,7 @@ export const colors = {
     dark: "#33415C",
     shallow: "rgba(92, 103, 125, 0.15)",
   },
-  backgrounds: {
+  background: {
     regular: "#FAF2CD",
     light: "#FFFAF0",
   },
