@@ -1,15 +1,8 @@
 import styled from "@emotion/styled";
-import { fonts, typography } from "../../style/typography";
 
-export const Logo = styled.h1`
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family: ${fonts.primary};
-  ${typography.body.sm};
-  ${typography.weight[700]};
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const Logo = styled.img`
+  height: 40px;
+  cursor: pointer;
 `;
 
 export const NavbarContainer = styled.div`

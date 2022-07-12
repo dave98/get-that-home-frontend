@@ -20,10 +20,11 @@ const icons = {
   home: <RiHome2Fill size={18} />,
   profile: <RiUserFill size={18} />,
 };
+
 const Navbar = ({ role, isAuth }) => {
   return (
     <NavbarContainer>
-      <Logo>GetThatHome</Logo>
+      <Logo src="/logo-capstone.svg" alt="logo" />
 
       <ButtonsContainer>
         <Button type={"transparent"} lefticon={icons.find}>
