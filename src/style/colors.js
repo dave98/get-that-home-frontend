@@ -1,7 +1,7 @@
 export const colors = {
   blues: {
     regular: "#13315C",
-    light: "#134074",
+    light: "#174171",
     dark: "#0B2545",
     shallow: "rgba(19, 49, 92, 0.15)",
   },
