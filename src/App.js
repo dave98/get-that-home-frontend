@@ -1,5 +1,11 @@
+import { Text, Heading } from "./components/typography"
+
+
 const App = () => {
-  return <h1> Clean app </h1>;
+  return <div>
+    <Heading> Clean app </Heading>
+    <Text>kabnduafh</Text>
+  </div>;
 };
 
 export default App;
