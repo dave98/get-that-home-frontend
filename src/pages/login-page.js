@@ -45,7 +45,9 @@ const LoginPage = () => {
           <Input label="EMAIL" placeholder={"user@mail.com"} type="email" />
           <Input label="PASSWORD" placeholder={"**********"} type="password" />
 
-          <Button lefticon={<RiUserReceived2Fill size={17} />}>LOGIN</Button>
+          <Button lefticon={<RiUserReceived2Fill size={17} />} margin={8}>
+            LOGIN
+          </Button>
         </LoginForm>
       </LoginPageWrapper>
     </>

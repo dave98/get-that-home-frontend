@@ -22,13 +22,18 @@ export const InputBox = styled.input`
   width: 100%;
   box-sizing: border-box;
   border: 1px solid ${colors.blues.light};
-  border-radius: 8px;
   backgorund: ${colors.white};
-  height: 40px;
   color: ${colors.grays.dark}
+  font-family: ${fonts.secondary};
+  ${typography.body.sm}
+  ${typography.weight[400]}
+  border-radius: 8px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 0.5rem;
+  fon
   &::placeholder{
     color: ${colors.grays.light}
   }

@@ -29,6 +29,7 @@ export const CustomizableButton = styled(motion.div)`
       ? colors.blues.regular
       : colors.white;
   }};
+  margin: ${({ margin }) => margin + "px" || ""};
   padding: ${({ size }) =>
     size === "sm"
       ? "4px 0.5rem"

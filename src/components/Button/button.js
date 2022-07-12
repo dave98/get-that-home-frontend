@@ -7,6 +7,7 @@ const Button = ({
   righticon,
   type,
   size,
+  margin,
   onClick,
   ...others
 }) => {
@@ -19,6 +20,7 @@ const Button = ({
         lefticon={lefticon}
         righticon={righticon}
         size={size}
+        margin={margin}
         onClick={onClick}
         {...others}
       >
@@ -43,4 +45,5 @@ Button.propTypes = {
   isLoading: PropTypes.bool,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,
+  margin: PropTypes.number,
 };
