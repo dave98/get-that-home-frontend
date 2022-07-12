@@ -1,4 +1,5 @@
 import { Container, ErrorMessage, InputBox, Label } from "./style";
+import PropTypes from "prop-types";
 
 const Input = ({
   type,
@@ -34,3 +35,15 @@ const Input = ({
 };
 
 export default Input;
+
+Input.propTypes = {
+  type: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.node,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  error: PropTypes.string,
+  isTouched: PropTypes.bool,
+  isValid: PropTypes.bool,
+  onBlur: PropTypes.func,
+};
