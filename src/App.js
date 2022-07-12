@@ -1,11 +1,20 @@
-import { Text, Heading } from "./components/typography"
+import styled from "@emotion/styled";
+import { useState } from "react";
+import Navbar from "./components/Navbar";
 
+const MainWrapper = styled.div`
+  display: flex;
+  position: relative;
+`;
 
 const App = () => {
-  return <div>
-    <Heading> Clean app </Heading>
-    <Text>kabnduafh</Text>
-  </div>;
+  const [isAuth, setIsAuth] = useState(false);
+
+  return (
+    <MainWrapper>
+      <Navbar isAuth={isAuth} role={"seller"} />
+    </MainWrapper>
+  );
 };
 
 export default App;

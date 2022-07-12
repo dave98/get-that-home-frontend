@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { colors } from "../../style/colors";
+import { fonts, typography } from "../../style/typography";
 
 export const CustomizableButton = styled(motion.div)`
   ${({ type, isDisable }) => {
@@ -28,25 +29,28 @@ export const CustomizableButton = styled(motion.div)`
       ? colors.blues.regular
       : colors.white;
   }};
-  font-family: sans-serif;
-  height: ${({ size }) =>
-    size === "sm" ? "32px" : size === "lg" ? "56px" : "40px"};
-  width: fit-content;
   padding: ${({ size }) =>
     size === "sm"
       ? "4px 0.5rem"
       : size === "lg"
       ? "1rem 1.5rem"
       : "0.5rem 1rem"};
+  height: ${({ size }) =>
+    size === "sm" ? "32px" : size === "lg" ? "56px" : "40px"};
+  font-family: sans-serif;
+  width: fit-content;
   outline: none;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  font-family: ${fonts.primary};
+  ${typography.body.xs};
+  ${typography.weight[500]};
   &:hover {
     ${({ type }) =>
       type === "line"
         ? `background-color: ${colors.blues.shallow};
      color: ${colors.grays.dark};
-     border: 2px solid ${colors.blues.dark};
+     border: 1px solid ${colors.blues.dark};
     `
         : type === "transparent"
         ? `background-color: ${colors.blues.shallow};
