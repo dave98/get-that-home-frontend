@@ -59,4 +59,9 @@ export const CustomizableButton = styled(motion.div)`
         : `background-color: ${colors.blues.dark}
     `}
   }
+  &::selection {
+    background: none;
+  }
 `;
+
+// Refactor to styles props in an object

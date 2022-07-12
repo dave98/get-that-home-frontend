@@ -1,6 +1,5 @@
 import { CustomizableButton } from "./style";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
 const Button = ({
   children,
@@ -11,24 +10,16 @@ const Button = ({
   onClick,
   ...others
 }) => {
-  const [isOver, setIsOver] = useState(false);
-  const [isClick, setIsClick] = useState(false);
   return (
     <>
       <CustomizableButton
-        animate={
-          isOver ? { scale: 1.05 } : isClick ? { scale: 0.9 } : { scale: 1 }
-        }
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         type={type}
         lefticon={lefticon}
         righticon={righticon}
         size={size}
-        onClick={() => {
-          setIsClick(true);
-          setIsOver(false);
-        }}
-        onMouseEnter={() => setIsOver(true)}
-        onMouseLeave={() => setIsOver(false)}
+        onClick={onClick}
         {...others}
       >
         {lefticon && lefticon}
