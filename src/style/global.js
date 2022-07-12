@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { colors } from "./colors";
+import { fonts } from "./typography";
+
 
 export const reset = css`
   @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
@@ -74,5 +76,6 @@ export const reset = css`
 export const global = css`
   body {
     background-color: ${colors.background.light};
+    font-family: ${fonts.primary};
   }
 `;
