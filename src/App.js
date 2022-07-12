@@ -11,6 +11,7 @@ const MainWrapper = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  scroll-behavior: smooth;
 `;
 
 const App = () => {
