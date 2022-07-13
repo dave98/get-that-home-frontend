@@ -38,4 +38,11 @@ export const InputBox = styled.input`
     color: ${colors.grays.light}
   }
 `;
-export const ErrorMessage = styled.p``;
+export const ErrorMessage = styled.p`
+  maring-top: -15px;
+  text-align: center;
+  font-family: ${fonts.secondary};
+  ${typography.body.xs}
+  ${typography.weight[500]}
+  color: #ef233c;
+`;
