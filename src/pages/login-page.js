@@ -7,11 +7,11 @@ import { Formik } from "formik";
 import { useAuth } from "../contexts/auth-context";
 
 const LoginPage = () => {
-  const { login } = useAuth();
+  const { login, error } = useAuth();
 
   const handleSubmit = (values) => {
-    console.log(values);
     login(values);
+    error && console.log(error);
   };
 
   return (

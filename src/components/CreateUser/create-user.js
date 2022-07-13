@@ -1,11 +1,14 @@
 import { Formik } from "formik";
+import { useAuth } from "../../contexts/auth-context";
 import Button from "../Button/button";
 import Input from "../Input";
 import { CreateUserFormContainer, CreateUserFormTitle } from "./style";
 
 const CreateUserForm = ({ type }) => {
+  const { join, error } = useAuth();
   const handleSubmit = (values) => {
-    console.log(values);
+    join(values);
+    error && console.log(error);
   };
 
   const validates = (values) => {

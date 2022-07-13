@@ -3,11 +3,11 @@ import apiFetch from "./api-fetch";
 
 export const login = async (credentials) => {
   const { token, ...user } = await apiFetch("login", { body: credentials });
-  sessionStorage(tokenKey, token);
+  sessionStorage.setItem(tokenKey, token);
   return user;
 };
 
 export const logout = async () => {
   await apiFetch("logout", { method: "DELETE" });
-  sessionStorage(tokenKey);
+  sessionStorage.removeItem(tokenKey);
 };

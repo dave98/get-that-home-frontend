@@ -17,6 +17,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     const user = await auth.login(credentials).catch(setError);
+    console.log(user);
     if (user) {
       setUser(user);
       navigate("/");
@@ -24,11 +25,11 @@ const AuthProvider = ({ children }) => {
     return user;
   };
 
-  const logout = async () =>
-    await auth
-      .logout()
-      .catch(setError)
-      .finally(() => setUser(null) && navigate("/login"));
+  const logout = async () => {
+    await auth.logout().catch(setError);
+    setUser(null);
+    navigate("/login");
+  };
 
   const join = async (data) => {
     const user = await createUser(data).catch(setError);

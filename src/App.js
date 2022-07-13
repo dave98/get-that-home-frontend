@@ -17,8 +17,8 @@ const MainWrapper = styled.div`
 `;
 
 const App = () => {
-  const { user } = useAuth();
   const [isAuth, setIsAuth] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     if (user) {
@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <MainWrapper>
-      <Navbar isAuth={isAuth} role={"seller"} />
+      <Navbar isAuth={isAuth} setIsAuth={setIsAuth} role={"seller"} />
       <Routes>
         <Route path="/" element={<div>Home</div>} />
         <Route path="login" element={<LoginPage />} />
