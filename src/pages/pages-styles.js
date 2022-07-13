@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import { colors, typography } from "../style";
 
 // LoginPage
@@ -12,7 +13,7 @@ export const LoginPageWrapper = styled.div`
   justify-content: center;
 `;
 
-export const LoginForm = styled.form`
+export const LoginForm = styled(motion.form)`
   display: flex;
   flex-direction: column;
   background-color: ${colors.background.light};

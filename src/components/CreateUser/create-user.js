@@ -76,7 +76,11 @@ const CreateUserForm = ({ type }) => {
         handleSubmit,
         isValid,
       }) => (
-        <CreateUserFormContainer onSubmit={handleSubmit}>
+        <CreateUserFormContainer
+          onSubmit={handleSubmit}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+        >
           <CreateUserFormTitle>Create your Account</CreateUserFormTitle>
           <Input
             label="NAME"

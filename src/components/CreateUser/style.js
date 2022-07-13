@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { colors, typography } from "../../style";
 
-export const CreateUserFormContainer = styled.form`
+export const CreateUserFormContainer = styled(motion.form)`
   display: flex;
   flex-direction: column;
   background-color: ${colors.background.light};
