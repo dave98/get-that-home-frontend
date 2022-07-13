@@ -30,7 +30,11 @@ const LoginPage = () => {
           touched,
           isValid,
         }) => (
-          <LoginForm onSubmit={handleSubmit}>
+          <LoginForm
+            onSubmit={handleSubmit}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+          >
             <LoginTitle>Login</LoginTitle>
             <Input
               label="EMAIL"

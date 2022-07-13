@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import { colors, typography } from "../style";
 
 // LoginPage
@@ -12,7 +13,7 @@ export const LoginPageWrapper = styled.div`
   justify-content: center;
 `;
 
-export const LoginForm = styled.form`
+export const LoginForm = styled(motion.form)`
   display: flex;
   flex-direction: column;
   background-color: ${colors.background.light};
@@ -32,4 +33,22 @@ export const LoginTitle = styled.h1`
   color: ${colors.black};
   margin: 1rem;
   cursor: default;
+`;
+
+// SignUpPage
+
+export const SignUpPageWrapper = styled.div`
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    ${colors.blues.light} 50%,
+    ${colors.white} 50%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  padding: 4rem 0px;
 `;
