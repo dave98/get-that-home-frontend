@@ -4,12 +4,16 @@ import { LoginPageWrapper, LoginForm, LoginTitle } from "./pages-styles";
 import { RiUserReceived2Fill } from "react-icons/ri";
 import { validate, initialLogin } from "./utils";
 import { Formik } from "formik";
-
-const handleSubmit = (values) => {
-  console.log(values);
-};
+import { useAuth } from "../contexts/auth-context";
 
 const LoginPage = () => {
+  const { login } = useAuth();
+
+  const handleSubmit = (values) => {
+    console.log(values);
+    login(values);
+  };
+
   return (
     <LoginPageWrapper>
       <Formik
@@ -38,7 +42,6 @@ const LoginPage = () => {
               isTouched={touched.email}
               onBlur={handleBlur}
             />
-            {console.log(isValid)}
             <Input
               label="PASSWORD"
               placeholder={"**********"}
