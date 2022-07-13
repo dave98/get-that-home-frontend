@@ -31,7 +31,11 @@ const Navbar = ({ role, isAuth }) => {
   };
   return (
     <NavbarContainer>
-      <Logo src="/logo-capstone.svg" alt="logo" />
+      <Logo
+        src="/logo-capstone.svg"
+        alt="logo"
+        onClick={(e) => handleClick(e, "/")}
+      />
 
       <ButtonsContainer>
         <Button buttontype={"transparent"} lefticon={icons.find}>
