@@ -6,7 +6,7 @@ export const Logo = styled.img`
 `;
 
 export const NavbarContainer = styled.div`
-  position: absolute;
+  position: sticky;
   height: 72px;
   left: 0px;
   right: 0px;

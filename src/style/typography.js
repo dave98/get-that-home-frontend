@@ -57,7 +57,7 @@ export const typography = {
     `,
     overline: `
     font-size: 10px;
-    line-height: 16px;
+    line-height: 12px;
     `,
   },
   weight: {

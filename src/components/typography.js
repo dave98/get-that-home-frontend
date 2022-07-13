@@ -3,7 +3,7 @@ import { fonts, typography } from "../style/typography";
 
 export const Text = styled.p`
   font-family: ${fonts.secondary};
-  ${(props) => typography.subtitle[props.size] || typography.subtitle.md};
+  ${(props) => typography.body[props.size] || typography.subtitle.md};
   font-weight: ${(props) => props.weight || "400"};
   color: ${(props) => props.color || "inherit"};
 `;

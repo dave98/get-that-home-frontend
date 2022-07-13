@@ -10,6 +10,7 @@ import {
   RiHome2Fill,
   RiUserFill,
 } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const icons = {
   login: <RiUserReceivedFill size={18} />,
@@ -22,15 +23,24 @@ const icons = {
 };
 
 const Navbar = ({ role, isAuth }) => {
+  const navigate = useNavigate();
+
+  const handleClick = (e, route) => {
+    e.preventDefault();
+    navigate(route);
+  };
   return (
     <NavbarContainer>
       <Logo src="/logo-capstone.svg" alt="logo" />
 
       <ButtonsContainer>
-        <Button type={"transparent"} lefticon={icons.find}>
+        <Button buttontype={"transparent"} lefticon={icons.find}>
           FIND A HOME
         </Button>
-        <Button type={"line"} lefticon={isAuth ? icons.logout : icons.join}>
+        <Button
+          buttontype={"line"}
+          lefticon={isAuth ? icons.logout : icons.join}
+        >
           {isAuth ? "LOGOUT" : "JOIN"}
         </Button>
         {isAuth ? (
@@ -42,7 +52,12 @@ const Navbar = ({ role, isAuth }) => {
         ) : (
           ""
         )}
-        <Button lefticon={isAuth ? icons.profile : icons.login}>
+        <Button
+          lefticon={isAuth ? icons.profile : icons.login}
+          onClick={(e) => {
+            isAuth ? handleClick(e, "/profile") : handleClick(e, "/login");
+          }}
+        >
           {isAuth ? "PROFILE" : "LOGIN"}
         </Button>
       </ButtonsContainer>
