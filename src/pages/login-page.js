@@ -1,56 +1,67 @@
-import styled from "@emotion/styled";
-import { RiUserReceived2Fill } from "react-icons/ri";
 import Button from "../components/Button/button";
-import { typography } from "../style";
-import { colors } from "../style/colors";
 import Input from "../components/Input";
+import { LoginPageWrapper, LoginForm, LoginTitle } from "./pages-styles";
+import { RiUserReceived2Fill } from "react-icons/ri";
+import { validate, initialLogin } from "./utils";
+import { Formik } from "formik";
 
-const LoginPageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors.background.regular};
-  height: 100vh;
-  width: 100vw;
-  align-items: center;
-  justify-content: center;
-`;
-
-const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors.background.light};
-  height: 256px;
-  width: 388px;
-  border-radius: 8px;
-  align-items: center;
-  justify-content: center;
-  padding: 0px 1rem;
-  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
-`;
-
-const LoginTitle = styled.h1`
-  ${typography.head.sm}
-  ${typography.weight[400]}
-  color: ${colors.black};
-  margin: 1rem;
-  cursor: default;
-`;
+const handleSubmit = (values) => {
+  console.log(values);
+};
 
 const LoginPage = () => {
   return (
-    <>
-      <LoginPageWrapper>
-        <LoginForm>
-          <LoginTitle>Login</LoginTitle>
-          <Input label="EMAIL" placeholder={"user@mail.com"} type="email" />
-          <Input label="PASSWORD" placeholder={"**********"} type="password" />
+    <LoginPageWrapper>
+      <Formik
+        initialValues={initialLogin}
+        validate={validate}
+        onSubmit={handleSubmit}
+      >
+        {({
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          values,
+          errors,
+          touched,
+          isValid,
+        }) => (
+          <LoginForm onSubmit={handleSubmit}>
+            <LoginTitle>Login</LoginTitle>
+            <Input
+              label="EMAIL"
+              placeholder={"user@mail.com"}
+              type="email"
+              value={values.email}
+              onChange={handleChange}
+              error={errors.email}
+              isTouched={touched.email}
+              onBlur={handleBlur}
+            />
+            {console.log(isValid)}
+            <Input
+              label="PASSWORD"
+              placeholder={"**********"}
+              type="password"
+              value={values.password}
+              onChange={handleChange}
+              error={errors.password}
+              isTouched={touched.password}
+              onBlur={handleBlur}
+            />
 
-          <Button lefticon={<RiUserReceived2Fill size={17} />} margin={8}>
-            LOGIN
-          </Button>
-        </LoginForm>
-      </LoginPageWrapper>
-    </>
+            <Button
+              lefticon={<RiUserReceived2Fill size={17} />}
+              margin={8}
+              type="submit"
+              disabled={!isValid}
+            >
+              LOGIN
+            </Button>
+          </LoginForm>
+        )}
+      </Formik>
+    </LoginPageWrapper>
   );
 };
 

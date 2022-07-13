@@ -3,29 +3,27 @@ import { motion } from "framer-motion";
 import { colors } from "../../style/colors";
 import { fonts, typography } from "../../style/typography";
 
-export const CustomizableButton = styled(motion.div)`
-  ${({ type, isDisable }) => {
-    if (isDisable) return `background-color: ${colors.grays.shallow};`;
-    return type === "line"
+export const CustomizableButton = styled(motion.button)`
+  ${({ buttontype }) => {
+    return buttontype === "line"
       ? `
     border: 1px solid ${colors.blues.regular};
     background-color: tansparent;`
-      : type === "transparent"
+      : buttontype === "transparent"
       ? `
     border: none;
     background-color: transparent;
     `
-      : `background-color: ${colors.blues.regular};`;
+      : `background-color: ${colors.blues.regular}; border: none;`;
   }}
   display: flex;
   gap: 0.5rem;
   align-items: center;
   border-radius: 3rem;
-  color: ${({ isDisable, type }) => {
-    if (isDisable) return colors.grays.light;
-    return type === "line"
+  color: ${({ buttontype }) => {
+    return buttontype === "line"
       ? colors.blues.regular
-      : type === "transparent"
+      : buttontype === "transparent"
       ? colors.blues.regular
       : colors.white;
   }};
@@ -47,13 +45,13 @@ export const CustomizableButton = styled(motion.div)`
   ${typography.body.xs};
   ${typography.weight[500]};
   &:hover {
-    ${({ type }) =>
-      type === "line"
+    ${({ buttontype }) =>
+      buttontype === "line"
         ? `background-color: ${colors.blues.shallow};
      color: ${colors.grays.dark};
      border: 1px solid ${colors.blues.dark};
     `
-        : type === "transparent"
+        : buttontype === "transparent"
         ? `background-color: ${colors.blues.shallow};
      color: ${colors.grays.dark};
     `
@@ -62,6 +60,10 @@ export const CustomizableButton = styled(motion.div)`
   }
   &::selection {
     background: none;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 `;
 

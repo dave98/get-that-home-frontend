@@ -27,10 +27,13 @@ const Navbar = ({ role, isAuth }) => {
       <Logo src="/logo-capstone.svg" alt="logo" />
 
       <ButtonsContainer>
-        <Button type={"transparent"} lefticon={icons.find}>
+        <Button buttontype={"transparent"} lefticon={icons.find}>
           FIND A HOME
         </Button>
-        <Button type={"line"} lefticon={isAuth ? icons.logout : icons.join}>
+        <Button
+          buttontype={"line"}
+          lefticon={isAuth ? icons.logout : icons.join}
+        >
           {isAuth ? "LOGOUT" : "JOIN"}
         </Button>
         {isAuth ? (
