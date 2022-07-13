@@ -16,7 +16,7 @@ const cardsData = [
     title: "Home Seeker",
     description: "You want to find a property",
     img: "/house-searching-cuate.svg",
-    route: "/join/home-seeker",
+    route: "/join/seeker",
   },
 ];
 
