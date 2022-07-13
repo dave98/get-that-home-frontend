@@ -33,3 +33,21 @@ export const LoginTitle = styled.h1`
   margin: 1rem;
   cursor: default;
 `;
+
+// SignUpPage
+
+export const SignUpPageWrapper = styled.div`
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    ${colors.blues.light} 50%,
+    ${colors.white} 50%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  padding: 4rem 0px;
+`;

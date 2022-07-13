@@ -40,6 +40,9 @@ const Navbar = ({ role, isAuth }) => {
         <Button
           buttontype={"line"}
           lefticon={isAuth ? icons.logout : icons.join}
+          onClick={(e) => {
+            isAuth ? handleClick(e, "/") : handleClick(e, "/join");
+          }}
         >
           {isAuth ? "LOGOUT" : "JOIN"}
         </Button>
