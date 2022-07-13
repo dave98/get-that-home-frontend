@@ -1,7 +1,7 @@
-import { BASE_URI, token_key } from "../config";
+import { BASE_URI, tokenKey } from "../config";
 
 async function apiFetch(endpoint, { method, headers, body } = {}) {
-  const token = sessionStorage.getItem(token_key);
+  const token = sessionStorage.getItem(tokenKey);
 
   if (token) {
     headers = {
