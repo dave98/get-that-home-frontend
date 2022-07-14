@@ -1,40 +1,52 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as auth from "../services/sessions-service";
+import { createUser, getUser } from "../services/users-service";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  // const [error, setError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const localUser = localStorage.getItem("user");
-    if (localUser) {
-      setUser(JSON.parse(localUser));
-    }
-    setIsLoading(false);
+    getUser().then(setUser).catch(setError);
   }, []);
 
-  const login = (user) => {
-    localStorage.setItem("user", JSON.stringify(user));
-    setUser(true);
-    navigate("/");
+  const login = async (credentials) => {
+    const user = await auth.login(credentials).catch(setError);
+    console.log(user);
+    if (user) {
+      setUser(user);
+      navigate("/");
+    }
+    return user;
   };
 
-  const logout = () => {
-    localStorage.removeItem("user");
+  const logout = async () => {
+    await auth.logout().catch(setError);
     setUser(null);
     navigate("/login");
   };
 
+  const join = async (data) => {
+    const user = await createUser(data).catch(setError);
+    if (user) {
+      setUser(user);
+      navigate("/");
+    }
+    return user;
+  };
+
   const value = {
     user,
-    isLoading,
+    // isLoading,
     login,
     logout,
-    // error,
+    join,
+    error,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

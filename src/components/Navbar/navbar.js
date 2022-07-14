@@ -11,6 +11,8 @@ import {
   RiUserFill,
 } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/auth-context";
+import { useEffect } from "react";
 
 const icons = {
   login: <RiUserReceivedFill size={18} />,
@@ -22,8 +24,15 @@ const icons = {
   profile: <RiUserFill size={18} />,
 };
 
-const Navbar = ({ role, isAuth }) => {
+const Navbar = ({ role, isAuth, setIsAuth }) => {
   const navigate = useNavigate();
+  const { logout, error, user } = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      setIsAuth(false);
+    }
+  }, [user, isAuth, setIsAuth]);
 
   const handleClick = (e, route) => {
     e.preventDefault();
@@ -31,7 +40,11 @@ const Navbar = ({ role, isAuth }) => {
   };
   return (
     <NavbarContainer>
-      <Logo src="/logo-capstone.svg" alt="logo" />
+      <Logo
+        src="/logo-capstone.svg"
+        alt="logo"
+        onClick={(e) => handleClick(e, "/")}
+      />
 
       <ButtonsContainer>
         <Button buttontype={"transparent"} lefticon={icons.find}>
@@ -41,7 +54,13 @@ const Navbar = ({ role, isAuth }) => {
           buttontype={"line"}
           lefticon={isAuth ? icons.logout : icons.join}
           onClick={(e) => {
-            isAuth ? handleClick(e, "/") : handleClick(e, "/join");
+            if (isAuth) {
+              logout();
+              handleClick(e, "/");
+              error && console.log(error);
+            } else {
+              handleClick(e, "/join");
+            }
           }}
         >
           {isAuth ? "LOGOUT" : "JOIN"}
