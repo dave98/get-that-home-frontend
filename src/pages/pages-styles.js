@@ -38,7 +38,7 @@ export const LoginTitle = styled.h1`
 // SignUpPage
 
 export const SignUpPageWrapper = styled.div`
-  height: 100vh;
+  height: 89vh;
   background: linear-gradient(
     180deg,
     ${colors.blues.light} 50%,
@@ -51,4 +51,5 @@ export const SignUpPageWrapper = styled.div`
   overflow: hidden;
   scroll-behavior: smooth;
   padding: 4rem 0px;
+  margin-top: 72px;
 `;

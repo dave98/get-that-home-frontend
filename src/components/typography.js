@@ -9,7 +9,8 @@ export const Text = styled.p`
 `;
 
 export const Heading = styled.h2`
-  font-family: ${fonts.primary};
+  font-family: ${(props) =>
+    props.font === "primary" ? fonts.primary : fonts.secondary};
   ${(props) => typography.head[props.size] || typography.head.md};
   font-weight: ${(props) => props.weight || "600"};
   color: ${(props) => props.color || "inherit"};
