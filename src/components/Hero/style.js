@@ -48,7 +48,7 @@ export const InputHeroContainer = styled.div`
 `;
 
 export const InputLabelHero = styled.label`
-  width: 100%;
+  width: 95%;
   border: none;
   box-sizing: border-box;
   color: ${colors.grays.dark}
@@ -58,7 +58,11 @@ export const InputLabelHero = styled.label`
 `;
 
 export const InputHero = styled.input`
-  width: 100%;
+  width: 95%;
   border: none;
   padding: 0.35rem 0;
+  &:focus {
+    outline: none;
+    border: none;
+  }
 `;
