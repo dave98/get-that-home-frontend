@@ -1,5 +1,3 @@
-// import {LanlordCard, Homeseeker} from "./components/cards";
-import { Text, Heading } from "./components/typography"
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
@@ -7,7 +5,6 @@ import Navbar from "./components/Navbar";
 import { useAuth } from "./contexts/auth-context";
 import LoginPage from "./pages/login-page";
 import SignUpPage from "./pages/signup-page";
-
 
 const MainWrapper = styled.div`
   display: flex;
