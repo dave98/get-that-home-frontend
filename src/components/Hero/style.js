@@ -16,7 +16,7 @@ export const HeroWrapper = styled.div`
 `;
 
 export const HeroContainer = styled.div`
-  background-color: rgba(11, 37, 69, 0.9);
+  background-color: rgba(11, 37, 69, 0.8);
   width: 100%;
   height: 100%;
   display: flex;

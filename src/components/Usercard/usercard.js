@@ -1,25 +1,32 @@
-import { UserContainer, ImgContainerUser,
-       ImgUser, UserText, InformationUser, 
-       RedesContainer, RedesContainer2} from "./style";
-import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai"
+import { UserContainer, ImgUser, RedesContainer } from "./style";
+import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
+import { Heading } from "../typography";
+import { colors } from "../../style/colors";
 
-function UserCard(){
-  return(
+function UserCard({ name, src, github, linkedin }) {
+  const handleClick = (link) => {
+    window.open(link, "_blank");
+  };
+  return (
     <UserContainer>
-      <ImgContainerUser>
-        <ImgUser/>
-      </ImgContainerUser>
-      <InformationUser>
-        <UserText>asjkdh asdds</UserText>
-        <RedesContainer>
-          <RedesContainer2>
-            <AiOutlineGithub/>
-            <AiFillLinkedin/>
-          </RedesContainer2>
-        </RedesContainer>
-      </InformationUser>
+      <ImgUser src={src} alt={name} />
+      <Heading size="sm" weight="400" color={colors.grays.dark} font="primary">
+        {name || "Nombre Apellido"}
+      </Heading>
+      <RedesContainer>
+        <AiOutlineGithub
+          size={28}
+          onClick={() => handleClick(github)}
+          style={{ cursor: "pointer" }}
+        />
+        <AiFillLinkedin
+          size={28}
+          onClick={() => handleClick(linkedin)}
+          style={{ cursor: "pointer" }}
+        />
+      </RedesContainer>
     </UserContainer>
-  )
+  );
 }
 
-export default  UserCard ;
+export default UserCard;
