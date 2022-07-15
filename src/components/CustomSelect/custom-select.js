@@ -5,8 +5,8 @@ const CustomSelect = ({ options, label, variant, name, ...props }) => {
     <SelectContainer>
       <SelectLabel htmlFor={name}>{label}</SelectLabel>
       <CustomSelectInput id={name} name={name} {...props}>
-        {options.map((e) => (
-          <option>{e}</option>
+        {options.map((e, i) => (
+          <option key={i}>{e}</option>
         ))}
       </CustomSelectInput>
     </SelectContainer>

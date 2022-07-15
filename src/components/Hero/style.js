@@ -9,10 +9,10 @@ export const HeroWrapper = styled.div`
   scroll-behavior: smooth;
   color: #fff;
   height: 100vh;
-  background-image: url(${(props) => props.img});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-image: url(${(props) => props.img});
 `;
 
 export const HeroContainer = styled.div`

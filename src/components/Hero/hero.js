@@ -21,7 +21,7 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
     e.preventDefault();
   };
 
-  const imgPath = "/home-img.jpg";
+  const imgPath = "/hero-cover.svg";
   if (isScriptLoaded && isScriptLoadSucceed) {
     return (
       <HeroWrapper img={imgPath}>
