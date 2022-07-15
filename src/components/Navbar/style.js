@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { colors } from "../../style";
 
 export const Logo = styled.img`
   height: 40px;
@@ -6,7 +7,7 @@ export const Logo = styled.img`
 `;
 
 export const NavbarContainer = styled.div`
-  position: sticky;
+  position: fixed;
   height: 72px;
   left: 0px;
   right: 0px;
@@ -16,6 +17,8 @@ export const NavbarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 16px 10rem;
+  z-index: 1;
+  background-color: ${colors.white};
 `;
 
 export const ButtonsContainer = styled.div`
