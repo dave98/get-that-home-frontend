@@ -47,7 +47,11 @@ const Navbar = ({ role, isAuth, setIsAuth }) => {
       />
 
       <ButtonsContainer>
-        <Button buttontype={"transparent"} lefticon={icons.find}>
+        <Button
+          buttontype={"transparent"}
+          lefticon={icons.find}
+          onClick={(e) => handleClick(e, "/properties")}
+        >
           FIND A HOME
         </Button>
         <Button

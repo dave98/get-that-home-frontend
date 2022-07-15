@@ -53,3 +53,48 @@ export const SignUpPageWrapper = styled.div`
   padding: 4rem 0px;
   margin-top: 72px;
 `;
+
+// ListPropertiesPage
+
+export const ListPropertiesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: ${colors.white};
+  padding-top: 72px;
+  height: fit-content;
+  width: 100vw;
+  padding-left: 10%;
+  padding-right: 10%;
+`;
+
+export const FiltersHead = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+`;
+
+export const ButtonsContainer = styled.div`
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+`;
+
+export const PropertyList = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  gap: 2rem 5rem;
+`;
