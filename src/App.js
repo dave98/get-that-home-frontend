@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useAuth } from "./contexts/auth-context";
 import LandingPage from "./pages/landing-page";
+import ListProperties from "./pages/list-properties-page";
 import LoginPage from "./pages/login-page";
 import SignUpPage from "./pages/signup-page";
 
@@ -37,7 +38,7 @@ const App = () => {
           <Route path=":landlord" element={<SignUpPage />} />
           <Route path=":seeker" element={<SignUpPage />} />
         </Route>
-        <Route path="properties" element={<div>Properties</div>} />
+        <Route path="properties" element={<ListProperties />} />
         <Route path="profile" element={<div>Profile</div>} />
       </Routes>
     </MainWrapper>
