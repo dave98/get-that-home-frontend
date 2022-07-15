@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import { colors } from "../../style";
 import { fonts, typography } from "../../style/typography";
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   background-color: ${colors.white};
   display: flex;
   position: relative;
@@ -11,9 +12,17 @@ export const Container = styled.div`
   width: 300px;
   min-height: 360px;
   height: fit-content;
+  cursor: pointer;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 `;
 export const CardImg = styled.div`
+  ${({ cover }) =>
+    cover
+      ? `background-image: url(${cover});`
+      : `background-image: url(/buildings.svg);`}
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: ${colors.grays.shallow};
   display: flex;
   justify-content: flex-end;
@@ -114,6 +123,6 @@ export const MutableBottom = styled.div`
   margin-top: 10px;
   color: ${colors.white};
   gap: 50px;
-  padding: 12px;
+  ${({ owned }) => (owned ? `padding: 12px` : `padding: 0`)}
   justify-content: center;
 `;

@@ -29,7 +29,12 @@ const PropertyCard = ({
   cover,
 }) => {
   return (
-    <Container>
+    <Container
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+    >
       <CardImg cover={cover}>
         {/* refactor this label into a separate component */}
         <CardLabel type={transactionType || "rental"}>
