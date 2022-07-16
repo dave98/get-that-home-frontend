@@ -18,12 +18,22 @@ import PaginationButtons from "../components/MicroComponents/pagination-buttons"
 const ListProperties = () => {
   const [properties, setProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const propertiesPerPage = 9;
 
   useEffect(() => {
     getProperties().then(setProperties).catch(console.error);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
+  const indexOfLastProperty = currentPage * propertiesPerPage;
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
+  const currentProperties = properties.slice(
+    indexOfFirstProperty,
+    indexOfLastProperty
+  );
   const pagesParser = (lenght) => Math.ceil(lenght / 9);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <ListPropertiesWrapper>
@@ -45,7 +55,7 @@ const ListProperties = () => {
         {properties.length} Properties found
       </Heading>
       <PropertyList>
-        {properties.slice(0, 9).map((property) => (
+        {currentProperties.map((property) => (
           <PropertyCard
             key={property.id}
             transactionType={property.transactionType}
@@ -64,6 +74,7 @@ const ListProperties = () => {
           totalPages={pagesParser(properties.length)}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          paginate={paginate}
         />
       )}
     </ListPropertiesWrapper>

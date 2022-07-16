@@ -1,6 +1,7 @@
 // CustomInput
 
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import { colors, typography } from "../../style";
 import { fonts } from "../../style/typography";
 
@@ -58,4 +59,22 @@ export const PaginationButton = styled.button`
   &:hover {
     background-color: ${colors.blues.shallow};
   }
+`;
+
+export const NextPrevButton = styled(motion.button)`
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: ${colors.blues.shallow};
+  border: none;
+  outline: none;
+  cursor: pointer;
+  ${typography.body.xs}
+  &:hover {
+    background-color: ${colors.blues.dark};
+    color: ${colors.white};
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
