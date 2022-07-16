@@ -45,6 +45,7 @@ export const InputHeroContainer = styled.div`
   width: 45%;
   border-right: 1px solid ${colors.grays.light};
   margin-left: 4px;
+  position: relative;
 `;
 
 export const InputLabelHero = styled.label`
@@ -64,5 +65,31 @@ export const InputHero = styled.input`
   &:focus {
     outline: none;
     border: none;
+  }
+`;
+
+export const SugestionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: ${colors.white};
+  z-index: 1;
+  position: absolute;
+  margin-top: 60px;
+  border-radius: 0 0 8px 8px;
+`;
+
+export const SugestionsItem = styled.div`
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+  color: ${colors.grays.dark}
+  font-family: ${fonts.secondary};
+  ${typography.body.xs}
+  ${typography.weight[400]}
+  cursor: pointer;
+  &:hover {
+    background-color: ${colors.blues.dark};
+    color: ${colors.white};
   }
 `;
