@@ -46,6 +46,16 @@ export const typography = {
     line-height: 20px;
     `,
   },
+  subtitle: {
+    1: `
+    font-size: 16px;
+    line-height: 22px;
+    `,
+    2: `
+    font-size: 14px;
+    line-height: 20px;
+    `,
+  },
   others: {
     button: `
     font-size: 14px;
