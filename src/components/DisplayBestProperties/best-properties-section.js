@@ -1,21 +1,18 @@
-import { useEffect, useState } from "react";
+import { useProperties } from "../../contexts/properties-context";
 import { colors } from "../../style";
 import PropertyCard from "../PropertyCard/cards";
 import { Heading, Text } from "../typography";
 import { BestPropertiesContainer, BestPropertiesWrapper } from "./style";
 
-const BestPropertiesSection = ({ properties }) => {
-  const [bestProperties, setBestProperties] = useState([]);
+const BestPropertiesSection = () => {
+  const { currentProperties } = useProperties();
 
-  useEffect(() => {
-    const getBestProperties = () => {
-      const bestProperties = properties
-        .filter((property) => property.rentAmount <= 1000)
-        .slice(0, 3);
-      setBestProperties(bestProperties);
-    };
-    getBestProperties();
-  }, [properties]);
+  const bestProperties = () => {
+    const filteredProperties = currentProperties
+      .filter((property) => property.rentAmount <= 1000)
+      .slice(0, 3);
+    return filteredProperties;
+  };
 
   return (
     <>
@@ -27,7 +24,7 @@ const BestPropertiesSection = ({ properties }) => {
           Homes for rent at the best prices
         </Heading>
         <BestPropertiesContainer>
-          {bestProperties.map((property) => (
+          {bestProperties().map((property) => (
             <PropertyCard
               key={property.id}
               price={property.rentAmount}

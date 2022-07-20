@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useAuth } from "./contexts/auth-context";
+import { PropertyProvider } from "./contexts/properties-context";
 import LandingPage from "./pages/landing-page";
 import ListProperties from "./pages/list-properties-page";
 import LoginPage from "./pages/login-page";
@@ -30,17 +31,19 @@ const App = () => {
 
   return (
     <MainWrapper>
-      <Navbar isAuth={isAuth} setIsAuth={setIsAuth} role={"seller"} />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="join" element={<SignUpPage />}>
-          <Route path=":landlord" element={<SignUpPage />} />
-          <Route path=":seeker" element={<SignUpPage />} />
-        </Route>
-        <Route path="properties" element={<ListProperties />} />
-        <Route path="profile" element={<div>Profile</div>} />
-      </Routes>
+      <PropertyProvider>
+        <Navbar isAuth={isAuth} setIsAuth={setIsAuth} role={"seller"} />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="join" element={<SignUpPage />}>
+            <Route path=":landlord" element={<SignUpPage />} />
+            <Route path=":seeker" element={<SignUpPage />} />
+          </Route>
+          <Route path="properties" element={<ListProperties />} />
+          <Route path="profile" element={<div>Profile</div>} />
+        </Routes>
+      </PropertyProvider>
     </MainWrapper>
   );
 };

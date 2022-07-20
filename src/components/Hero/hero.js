@@ -15,18 +15,20 @@ import {
   SugestionsWrapper,
 } from "./style";
 import { useState } from "react";
+import { useProperties } from "../../contexts/properties-context";
 
 const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
   const [address, setAddress] = useState("");
+  const { filteredProperties } = useProperties();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      adress: address,
+      address: address,
       propertyType: e.target.property_type.value,
       transactionType: e.target.transaction_type.value,
     };
-    console.log(data);
+    filteredProperties(data);
   };
 
   const imgPath = "/hero-cover.svg";
@@ -53,12 +55,12 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
             <CustomSelect
               label={"I'M LOOKING FOR"}
               name={"property_type"}
-              options={["Apartments", "Houses", "Offices"]}
+              options={["aparment", "house", "Office"]}
             />
             <CustomSelect
               label={"I WANT TO"}
               name={"transaction_type"}
-              options={["Rent", "Buy"]}
+              options={["rent", "sell"]}
             />
             <PlacesAutocomplete
               value={address}
