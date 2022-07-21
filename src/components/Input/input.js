@@ -1,18 +1,7 @@
 import { Container, ErrorMessage, InputBox, Label } from "./style";
 import PropTypes from "prop-types";
 
-const Input = ({
-  type,
-  label = "",
-  value,
-  onChange,
-  placeholder,
-  error,
-  isTouched,
-  isValid,
-  onBlur,
-  ...props
-}) => {
+const Input = ({ type, name, label = "", value, onChange, placeholder, error, isTouched, isValid, onBlur, ...props}) => {
   const globalName = label.toLocaleLowerCase().replace(/ /g, "_");
 
   return (
@@ -21,7 +10,7 @@ const Input = ({
       <InputBox
         type={type || "text"}
         id={globalName}
-        name={globalName}
+        name={name || globalName}
         value={value}
         onBlur={onBlur}
         onChange={onChange}

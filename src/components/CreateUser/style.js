@@ -14,6 +14,7 @@ export const CreateUserFormContainer = styled(motion.form)`
   justify-content: center;
   padding: 0px 1rem;
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+  gap: 0.5rem;
 `;
 
 export const CreateUserFormTitle = styled.h1`

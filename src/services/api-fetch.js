@@ -1,6 +1,6 @@
 import { BASE_URI, tokenKey } from "../config";
 
-async function apiFetch(endpoint, { method, headers, body } = {}) {
+async function apiFetch(endpoint, { method, headers, body } = {}, avoidJSONformat = false) {
   const token = sessionStorage.getItem(tokenKey);
 
   if (token) {
@@ -10,7 +10,7 @@ async function apiFetch(endpoint, { method, headers, body } = {}) {
     };
   }
 
-  if (body) {
+  if (body && !avoidJSONformat) {
     headers = {
       "Content-Type": "application/json",
       ...headers,
@@ -20,7 +20,7 @@ async function apiFetch(endpoint, { method, headers, body } = {}) {
   const config = {
     method: method || (body ? "POST" : "GET"),
     headers,
-    body: body ? JSON.stringify(body) : null,
+    body: body ? avoidJSONformat ? body : JSON.stringify(body) : null,
   };
 
   const response = await fetch(BASE_URI + endpoint, config);
