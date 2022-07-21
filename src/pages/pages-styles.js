@@ -25,6 +25,7 @@ export const LoginForm = styled(motion.form)`
   justify-content: center;
   padding: 0px 1rem;
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+  gap: 0.5rem;
 `;
 
 export const LoginTitle = styled.h1`
@@ -98,3 +99,39 @@ export const PropertyList = styled.div`
   margin-bottom: 1rem;
   gap: 2rem 5rem;
 `;
+
+export const EditPropertyWrapper = styled.div({
+  height: "89vh",
+  background: `conic-gradient(from 300deg at 125% 95%, ${colors.blues.light} 50%, ${colors.white} 50%)`,
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "flex-start",
+  width: "100vw",
+  overflowY: "scroll",
+  scrollBehavior: "smooth",
+  padding: "3rem 50px 3rem 200px",
+  marginTop: 72,
+})
+
+
+export const FriendlyImageContainer = styled(motion.div)({
+  position: "absolute",
+  right: "5%",
+  top: "5%",
+  height: 900,
+  width: "auto",
+  "@media(max-width: 1700px)": {
+    height: 700,
+    top: "20%"
+  },
+  "@media(max-width: 1200px)": {
+    display: "none"
+  }
+})
+
+export const FriendlyImage = styled.img({
+  height: "100%",
+  width: "auto",
+  objectFit: "cover",
+  borderRadius: 8,
+})

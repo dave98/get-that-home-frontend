@@ -1,14 +1,24 @@
 import { CustomSelectInput, SelectContainer, SelectLabel } from "./style";
 
-const CustomSelect = ({ options, label, variant, name, ...props }) => {
+const CustomSelect = ({ options, variant, name, label, value, onChange, onBlur, width, ...props }) => {
   return (
-    <SelectContainer variant={variant}>
+    <SelectContainer variant={variant} width={width} >
       {label && <SelectLabel htmlFor={name}>{label}</SelectLabel>}
-      <CustomSelectInput id={name} name={name} variant={variant} {...props}>
+
+      <CustomSelectInput 
+        variant={variant} 
+        id={name} 
+        name={name} 
+        value={value}
+        onBlur={onBlur}
+        onChange={onChange}
+        {...props}
+      >
         {options.map((e, i) => (
           <option key={i}>{e}</option>
         ))}
       </CustomSelectInput>
+      
     </SelectContainer>
   );
 };

@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useAuth } from "./contexts/auth-context";
+import CreatePropertyPage from "./pages/create-property";
+import EditProperty from "./pages/edit-property";
 import LandingPage from "./pages/landing-page";
 import ListProperties from "./pages/list-properties-page";
 import LoginPage from "./pages/login-page";
+import ShowProperty from "./pages/show-property";
 import SignUpPage from "./pages/signup-page";
 
 const MainWrapper = styled.div`
@@ -40,6 +43,11 @@ const App = () => {
         </Route>
         <Route path="properties" element={<ListProperties />} />
         <Route path="profile" element={<div>Profile</div>} />
+        <Route path="property" >
+          <Route  path="show" element={ <ShowProperty/>  }/>
+          <Route  path="edit" element={ <EditProperty/>  }/>
+          <Route  path="create" element={ <CreatePropertyPage/>  }/>
+        </Route>
       </Routes>
     </MainWrapper>
   );
