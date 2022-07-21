@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import {
   getFilteredProperties,
   getProperties,
+  myProperties,
 } from "../services/properties-service";
 
 const PropertyContext = createContext();
 
 const PropertyProvider = ({ children }) => {
   const [currentProperties, setCurrentProperties] = useState([]);
+  const [myPropertiesList, setMyPropertiesList] = useState([])
   const [currentProperty, setCurrentProperty] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +26,16 @@ const PropertyProvider = ({ children }) => {
     navigate("/properties");
   };
 
+  async function getMyProperties(){
+    await myProperties()
+      .then(properties => {
+        setMyPropertiesList(properties);
+      })
+      .catch((errors) => {
+        console.error("My properties can't be shown: ", errors);
+      })
+  }
+
   const value = {
     currentProperties,
     isLoading,
@@ -33,6 +45,9 @@ const PropertyProvider = ({ children }) => {
     setCurrentProperty,
     currentProperty,
     filteredProperties,
+    getMyProperties,
+    myPropertiesList, 
+    setMyPropertiesList,
   };
 
   return (

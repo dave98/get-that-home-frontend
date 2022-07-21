@@ -129,9 +129,28 @@ export const FriendlyImageContainer = styled(motion.div)({
   }
 })
 
+export const LostImageContainer = styled(motion.div)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  height: 800,
+  width: "auto",
+  marginTop: "5%",
+})
+
+export const LostImageHelperText = styled.p({
+  fontSize: 25,
+})
+
 export const FriendlyImage = styled.img({
   height: "100%",
   width: "auto",
   objectFit: "cover",
   borderRadius: 8,
+})
+
+// MyPropertiesStyles
+export const MyPropertiesContainer = styled.div({
+  
 })

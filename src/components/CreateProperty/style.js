@@ -60,14 +60,24 @@ export const CreatePropertyFormImageImagesContainer = styled.div({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent:"left",
     gap: 4,
     borderRadius: 8,
     backgroundColor: colors.blues.shallow
 })
 
 export const CreatePropertyFormImageImage = styled(motion.div)({
-    height: 120,
-    width: 120,
-    borderRadius: 8,
+    height: 105,
+    width: 105,
+    borderRadius: 5,
     backgroundColor: colors.grays.regular,
+    display: "flex",
+    justifyContent: "center"
+})
+
+export const PropertyFormFriendlyImage = styled.img({
+    height: "100%",
+    width: "auto",
+    objectFit: "cover",
+    
 })

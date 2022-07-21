@@ -71,7 +71,13 @@ const Navbar = ({ role, isAuth, setIsAuth }) => {
         </Button>
         {isAuth ? (
           role === "seller" ? (
-            <Button lefticon={icons.heart}>SAVED PROPERTIES</Button>
+            <Button 
+              lefticon={icons.heart}
+              onClick={(event) => {
+                event.preventDefault();
+                navigate("/my-properties") 
+              }}
+            >SAVED PROPERTIES</Button>
           ) : (
             <Button lefticon={icons.home}>MY PROPERTIES</Button>
           )

@@ -19,11 +19,15 @@ export async function createPropertyWihFormData(propertyData){
 }
 
 export async function updateProperty(id, propertyData){
-  return await apiFetch("properties/" + id, {body: propertyData, method: "PATCH"});
+  return await apiFetch("properties/update-with-images/" + id, {body: propertyData, method: "PATCH"}, true);
 }
 
 export async function deleteProperty(id){
   return await apiFetch("properties/" +  id, {method: "DELETE"});
+}
+
+export async function myProperties(){
+  return await apiFetch("properties/owned");
 }
 
 export const getFilteredProperties = async (filters) => {

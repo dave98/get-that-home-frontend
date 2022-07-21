@@ -11,9 +11,17 @@ const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  //useEffect(() => {
+  //  user !== null && getUser().then(setUser).catch(setError);
+  //}, [user]);
+
   useEffect(() => {
-    user !== null && getUser().then(setUser).catch(setError);
-  }, [user]);
+    getUser()
+      .then(user => {
+        setUser(user);
+      })
+      .catch(setError)
+  }, [])
 
   const login = async (credentials) => {
     const user = await auth.login(credentials).catch(setError);
@@ -27,7 +35,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     await auth.logout().catch(setError);
-    setUser(null);
+    setUser(null); 
     navigate("/login");
   };
 

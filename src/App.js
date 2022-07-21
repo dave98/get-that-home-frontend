@@ -12,6 +12,8 @@ import ListProperties from "./pages/list-properties-page";
 import LoginPage from "./pages/login-page";
 import ShowProperty from "./pages/show-property";
 import SignUpPage from "./pages/signup-page";
+import { IndividualPropertyProvider } from "./contexts/individual-property-context";
+import MyProperties from "./pages/my-properties";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -36,22 +38,25 @@ const App = () => {
   return (
     <MainWrapper>
       <PropertyProvider>
-        <Navbar isAuth={isAuth} setIsAuth={setIsAuth} role={"seller"} />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="join" element={<SignUpPage />}>
-              <Route path=":landlord" element={<SignUpPage />} />
-              <Route path=":seeker" element={<SignUpPage />} />
-            </Route>
-            <Route path="properties" element={<ListProperties />} />
-            <Route path="profile" element={<div>Profile</div>} />
-            <Route path="property" >
-              <Route  path="show" element={ <ShowProperty/>  }/>
-              <Route  path="edit" element={ <EditProperty/>  }/>
-              <Route  path="create" element={ <CreatePropertyPage/>  }/>
-            </Route>
-          </Routes>
+        <IndividualPropertyProvider>
+          <Navbar isAuth={isAuth} setIsAuth={setIsAuth} role={"seller"} />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="join" element={<SignUpPage />}>
+                <Route path=":landlord" element={<SignUpPage />} />
+                <Route path=":seeker" element={<SignUpPage />} />
+              </Route>
+              <Route path="properties" element={<ListProperties />} />
+              <Route path="my-properties" element={<MyProperties/> } />
+              <Route path="profile" element={<div>Profile</div>} />
+              <Route path="property" >
+                <Route  path="show" element={ <ShowProperty/>  }/>
+                <Route  path="edit" element={ <EditProperty/>  }/>
+                <Route  path="create" element={ <CreatePropertyPage/>  }/>
+              </Route>
+            </Routes>
+          </IndividualPropertyProvider>
       </PropertyProvider>
     </MainWrapper>
   );

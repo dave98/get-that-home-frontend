@@ -1,6 +1,8 @@
 import { BASE_URI, tokenKey } from "../config";
 
 async function apiFetch(endpoint, { method, headers, body } = {}, avoidJSONformat = false) {
+  console.log("Flagging: ", endpoint)
+
   const token = sessionStorage.getItem(tokenKey);
 
   if (token) {

@@ -1,7 +1,7 @@
 import { Formik } from "formik";
+import { useEffect, useState } from "react";
 import { RiMoneyDollarCircleLine, RiSearchLine, RiUpload2Line } from "react-icons/ri";
 import { useIndividualProperty } from "../../contexts/individual-property-context";
-import { createPropertyWihFormData } from "../../services/properties-service";
 import Button from "../Button/button";
 import CustomSelect from "../CustomSelect";
 import Input from "../Input";
@@ -18,27 +18,52 @@ import {
     CreatePropertyFormImageTitle, 
     CreatePropertyFormPetsHelperText, 
     CreatePropertyFormPropertyConfigContainer, 
-    CreatePropertyFormTitle } from "./style";
+    CreatePropertyFormTitle, 
+    PropertyFormFriendlyImage} from "./style";
 
 export default function CreatePropertyForm(){
-    const {createProperty} = useIndividualProperty();
+    const {createProperty, updateProperty, selected, currentOperation} = useIndividualProperty();
+    const initialValues = (function(){
+        if(currentOperation == "edit"){
+            return {
+                operationType: selected.operationType,
+                address: selected.address,
+                rentAmount: selected.rentAmount,
+                maintenance: selected.maintenance,
+                propertyType: selected.propertyType,
+                bedrooms: selected.bedrooms,
+                bathrooms: selected.bathrooms,
+                area: selected.area,
+                petsAllowed: selected.petsAllowed,
+                about: selected.about,
+                images: selected.images_url,
+            }
+        }else{
+            return {
+                operationType: "rent",
+                address: "",
+                rentAmount: "",
+                maintenance: "",
+                propertyType: "",
+                bedrooms: 1,
+                bathrooms: 1,
+                area: 25,
+                petsAllowed: null,
+                about: "",
+                images: [],
+            }     
+        }
+    })();
 
-    const initialValues = {
-        operationType: "",
-        address: "",
-        rentAmount: "",
-        maintenance: "",
-        propertyType: "",
-        bedrooms: 1,
-        bathrooms: 1,
-        area: 25,
-        petsAllowed: null,
-        about: "",
-        images: "",
-    }
+    const [imagesPreview, setImagesPreview] = useState([]);
+
+    useEffect(() => {
+        console.log(selected)
+    }, [])
 
     function validate(values){
         const errors = {};
+        console.log(values);
         if(!values.operationType){
             errors.operationType = "A operation type is required";
         }
@@ -57,7 +82,24 @@ export default function CreatePropertyForm(){
         return errors;
     }
 
+    async function addImages(files){
+        let tImagesPreview =  await Promise.all([].map.call(files, function(file){
+            return new Promise(function(resolve, reject){
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = function(){
+                    resolve({result: reader.result, file: file});
+                }
+            })
+            .then(results => {
+                return results.result
+            })
+        }))
+        setImagesPreview(tImagesPreview);
+    }
+
     async function handleSubmit(values){
+        console.log("Values: ", values);
         const formData = new FormData();
         formData.append("property[operationType]", values.operationType);
         formData.append("property[address]", values.address);
@@ -70,14 +112,21 @@ export default function CreatePropertyForm(){
         formData.append("property[area]", values.area );
         formData.append("property[petsAllowed]", !!values.petsAllowed);
         formData.append("property[about]", values.about);
-        if(values.images.length){
-            values.images.forEach(i => {
-                formData.append("property[images][]", i, i.name);
-            })
-        }else{
-            formData.append("property[images][]", "")
+        if(imagesPreview.length){
+            if(values.images.length){
+                values.images.forEach(i => {
+                    formData.append("property[images][]", i, i.name);
+                })
+            }else{
+                formData.append("property[images][]", "")
+            }
         }
-        await createProperty(formData)
+
+        if(currentOperation == "create"){
+            await createProperty(formData);
+        }else{
+            await updateProperty(selected.id, formData);
+        }
     }
 
     return (
@@ -92,7 +141,11 @@ export default function CreatePropertyForm(){
                         initial={{scale: 0}}
                         animate={{scale: 1}}
                     >
-                        <CreatePropertyFormTitle>Create a property thing</CreatePropertyFormTitle>
+                        {
+                            currentOperation == "create"
+                                ? <CreatePropertyFormTitle>Create a property thing</CreatePropertyFormTitle>
+                                :  <CreatePropertyFormTitle>Edit a property thing</CreatePropertyFormTitle>
+                        }
                         
                         <Input
                             type="text"
@@ -223,16 +276,38 @@ export default function CreatePropertyForm(){
                                     onChange={(event) => {
                                         const files = event.target.files;
                                         let myFiles = Array.from(files);
-                                        console.log(myFiles);
-                                        setFieldValue("images", myFiles)
+                                        addImages(myFiles);
+                                        setFieldValue("images", myFiles);
                                     }}
-                                    onBlur={handleBlur}
+                                    onBlur={handleBlur} 
                                     isTouched={touched.images}
                                     error={errors.images}
                                 />
                             </CreatePropertyFormImageInputContainer>
                             <CreatePropertyFormImageImagesContainer>
-                                <CreatePropertyFormImageImage initial={{scale: 0}} animate={{scale: 1}}/>
+                                    {
+                                        imagesPreview.length
+                                            ? imagesPreview.map((image, index) => {
+                                                return (
+                                                    <CreatePropertyFormImageImage key={index} initial={{scale: 0}} animate={{scale: 1}}>
+                                                        <PropertyFormFriendlyImage src={image}/>
+                                                    </CreatePropertyFormImageImage>
+                                                )
+                                            })
+                                            :  values.images.length
+                                            ? values.images.map((image, index) => {
+                                                return (
+                                                    <CreatePropertyFormImageImage key={index} initial={{scale: 0}} animate={{scale: 1}}>
+                                                        <PropertyFormFriendlyImage src={image}/>
+                                                    </CreatePropertyFormImageImage>
+                                                )
+                                            })
+                                            : (
+                                                <CreatePropertyFormImageImage initial={{scale: 0}} animate={{scale: 1}}>
+                                                    <PropertyFormFriendlyImage src="/image-upload-bro.svg"/>
+                                                </CreatePropertyFormImageImage>
+                                            )
+                                    }
                             </CreatePropertyFormImageImagesContainer>
                         </CreatePropertyFormImageContainer>
                         <Button 
@@ -240,7 +315,7 @@ export default function CreatePropertyForm(){
                             type="submit"
                             disabled={!isValid}
                         >
-                            PUBLISH PROPERTY LISTING
+                            {currentOperation == "create" ? "PUBLISH PROPERTY LISTING" : "UPDATE PROPERTY" }
                         </Button>
                     </CreatePropertyFormContainer>
                 )

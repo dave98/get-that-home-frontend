@@ -14,9 +14,7 @@ root.render(
     <Global styles={reset} />
     <Router>
       <AuthProvider>
-        <IndividualPropertyProvider>
           <App />
-        </IndividualPropertyProvider>
       </AuthProvider>
     </Router>
   </>
