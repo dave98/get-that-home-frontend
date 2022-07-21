@@ -11,19 +11,28 @@ import Button from "../components/Button/button";
 import CustomSelect from "../components/CustomSelect/custom-select";
 import { Heading } from "../components/typography";
 import { useEffect, useState } from "react";
-import { getProperties } from "../services/properties-service";
 import PropertyCard from "../components/PropertyCard";
 import PaginationButtons from "../components/MicroComponents/pagination-buttons";
+import { useProperties } from "../contexts/properties-context";
 
 const ListProperties = () => {
-  const [properties, setProperties] = useState([]);
+  const { currentProperties } = useProperties();
   const [currentPage, setCurrentPage] = useState(1);
+  const propertiesPerPage = 9;
 
   useEffect(() => {
-    getProperties().then(setProperties).catch(console.error);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
+  const indexOfLastProperty = currentPage * propertiesPerPage;
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
+  const properties = currentProperties.slice(
+    indexOfFirstProperty,
+    indexOfLastProperty
+  );
   const pagesParser = (lenght) => Math.ceil(lenght / 9);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <ListPropertiesWrapper>
@@ -42,10 +51,10 @@ const ListProperties = () => {
         <CustomSelect variant="search" options={["Buying & Selling"]} />
       </FiltersHead>
       <Heading weight={500} size="xs">
-        {properties.length} Properties found
+        {currentProperties.length} Properties found
       </Heading>
       <PropertyList>
-        {properties.slice(0, 9).map((property) => (
+        {properties.map((property) => (
           <PropertyCard
             key={property.id}
             transactionType={property.transactionType}
@@ -59,11 +68,12 @@ const ListProperties = () => {
           />
         ))}
       </PropertyList>
-      {properties.length > 9 && (
+      {currentProperties.length > 9 && (
         <PaginationButtons
-          totalPages={pagesParser(properties.length)}
+          totalPages={pagesParser(currentProperties.length)}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          paginate={paginate}
         />
       )}
     </ListPropertiesWrapper>
