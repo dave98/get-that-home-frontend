@@ -61,13 +61,13 @@ export const ShowPropertyWrapper = styled(motion.div)({
   padding: "0 15%",
   display: "flex",
   gap: 16,
-})
+});
 
 export const ShowPropertyContainer = styled.div({
   width: 830,
   height: 1606,
   backgroundColor: colors.white,
-})
+});
 
 // ListPropertiesPage
 
@@ -102,19 +102,16 @@ export const ButtonsContainer = styled.div`
   gap: 0.5rem;
 `;
 
-export const PropertyList = styled.div( 
-  ({justify = "center"}) =>  ({
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: justify,
-    alignItems: "center",
-    width: "100%",
-    margin: "1rem 0 1rem 0",
-    gap: "2rem 5rem"
-  })
-)
-
+export const PropertyList = styled.div(({ justify = "center" }) => ({
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: justify,
+  alignItems: "center",
+  width: "100%",
+  margin: "1rem 0 1rem 0",
+  gap: "2rem 5rem",
+}));
 
 export const EditPropertyWrapper = styled.div({
   height: "89vh",
@@ -144,20 +141,23 @@ export const FriendlyImageContainer = styled(motion.div)({
   },
 });
 
-export const LostImageContainer = styled(motion.div)({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "auto",
-  marginTop: "5%",
-}, ({height}) => ({
-  height: height ? height : 800,
-}))
+export const LostImageContainer = styled(motion.div)(
+  {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "auto",
+    marginTop: "5%",
+  },
+  ({ height }) => ({
+    height: height ? height : 800,
+  })
+);
 
 export const LostImageHelperText = styled.p({
   fontSize: 25,
-})
+});
 
 export const FriendlyImage = styled.img({
   height: "100%",
@@ -182,16 +182,19 @@ export const MyPropertiesTabsContainer = styled.div({
   gap: 24,
   width: "100%",
   padding: "20px 0",
-})
+});
 
-export const MyPropertiesTab = styled(motion.div)({
-  paddingBottom: 6,
-  color: "gray",
-  cursor: "pointer",
-}, ({active}) => ({
-  borderBottom: active ? "2px solid red" : "none",
-  color: active ? "black" : "gray",
-}))
+export const MyPropertiesTab = styled(motion.div)(
+  {
+    paddingBottom: 6,
+    color: "gray",
+    cursor: "pointer",
+  },
+  ({ active }) => ({
+    borderBottom: active ? "2px solid red" : "none",
+    color: active ? "black" : "gray",
+  })
+);
 
 export const MyPropertiesTabText = styled.p({
   fontSize: 18,
@@ -199,7 +202,7 @@ export const MyPropertiesTabText = styled.p({
   textTransform: "uppercase",
   letterSpacing: 1.25,
   color: "inherit",
-})
+});
 
 // MyProfileStyles
 export const ProfileContainer = styled.div({
@@ -210,7 +213,7 @@ export const ProfileContainer = styled.div({
   flexDirection: "column",
   alignItems: "center",
   gap: 50,
-})
+});
 
 export const ProfileImageContainer = styled(motion.div)({
   height: 400,
@@ -218,28 +221,36 @@ export const ProfileImageContainer = styled(motion.div)({
   display: "flex",
   justifyContent: "center",
   backgroundColor: "gray",
-  borderRadius: "50%"
-})
+  borderRadius: "50%",
+});
 
 export const ProfileImage = styled.img({
-  objectFit: "cover"
-})
+  objectFit: "cover",
+});
 
 export const ProfileDescriptionContainer = styled(motion.div)({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: 10,
-})
+});
 
 export const ProfileName = styled.h2({
   fontSize: 35,
   fontFamily: fonts.primary,
   letterSpacing: 3,
-})
+});
 
 export const ProfileDescription = styled.p({
   fontSize: 20,
   fontFamily: fonts.secondary,
-  letterSpacing: 1
-})
+  letterSpacing: 1,
+});
+
+export const ErrorMessageGlobal = styled.p({
+  fontSize: 14,
+  fontFamily: fonts.secondary,
+  letterSpacing: 1,
+  color: "red",
+  marginBottom: "0.5rem",
+});

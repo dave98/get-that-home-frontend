@@ -107,5 +107,5 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
 };
 
 export default scriptLoader([
-  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_JS_MAPS_API}&libraries=places`,
+  `https://maps.googleapis.com/maps/api/js?key=AIzaSyA5kEmbyBuoEHTi0lcQ9Ytr73QWePlFhow&libraries=places`,
 ])(Hero);
