@@ -1,3 +1,4 @@
+import { useIndividualProperty } from "../../contexts/individual-property-context";
 import { useProperties } from "../../contexts/properties-context";
 import { colors } from "../../style";
 import PropertyCard from "../PropertyCard/cards";
@@ -6,6 +7,7 @@ import { BestPropertiesContainer, BestPropertiesWrapper } from "./style";
 
 const BestPropertiesSection = () => {
   const { currentProperties } = useProperties();
+  const {showProperty} = useIndividualProperty();
 
   const bestProperties = () => {
     const filteredProperties = currentProperties
@@ -35,6 +37,7 @@ const BestPropertiesSection = () => {
               sqmeters={property.area}
               pets={property.pets}
               cover={property.base_image_url}
+              onShow={() => { showProperty(property.id)} }
             />
           ))}
         </BestPropertiesContainer>

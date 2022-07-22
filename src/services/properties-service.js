@@ -19,11 +19,27 @@ export async function createPropertyWihFormData(propertyData){
 }
 
 export async function updateProperty(id, propertyData){
-  return await apiFetch("properties/" + id, {body: propertyData, method: "PATCH"});
+  return await apiFetch("properties/update-with-images/" + id, {body: propertyData, method: "PATCH"}, true);
+}
+
+export async function updateClosedProperty(id, closedBody){
+  return await apiFetch("properties/" + id, {body: closedBody, method: "PATCH"});
 }
 
 export async function deleteProperty(id){
   return await apiFetch("properties/" +  id, {method: "DELETE"});
+}
+
+export async function myProperties(){
+  return await apiFetch("properties/owned");
+}
+
+export async function myFavoriteProperties(){
+  return await apiFetch("likes");
+}
+
+export async function myContactedProperties(){
+  return await apiFetch("contacts");
 }
 
 export const getFilteredProperties = async (filters) => {

@@ -14,11 +14,13 @@ import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import PaginationButtons from "../components/MicroComponents/pagination-buttons";
 import { useProperties } from "../contexts/properties-context";
+import { useIndividualProperty } from "../contexts/individual-property-context";
 import FilterModal from "../components/FiltersModal/filters-modal";
 import { getFilteredProperties } from "../services/properties-service";
 
 const ListProperties = () => {
-  const { currentProperties, setCurrentProperties } = useProperties();
+  const { showProperty } = useIndividualProperty();
+  const { currentProperties } = useProperties();
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 9;
   const [filters, setFilters] = useState({
@@ -161,7 +163,7 @@ const ListProperties = () => {
         {properties.map((property) => (
           <PropertyCard
             key={property.id}
-            transactionType={property.transactionType}
+            transactionType={property.operationType}
             propertyType={property.propertyType}
             price={property.rentAmount}
             beds={property.bedrooms}
@@ -169,6 +171,7 @@ const ListProperties = () => {
             sqmeters={property.area}
             address={property.address}
             cover={property.base_image_url}
+            onShow={() => { showProperty(property.id) }}
           />
         ))}
       </PropertyList>
