@@ -23,8 +23,12 @@ const PropertyProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProperties().then(setCurrentProperties).catch(setError);
-  }, []);
+    if (currentProperties.length === 0) {
+      getProperties().then(setCurrentProperties).catch(setError);
+    } else {
+      return;
+    }
+  }, [currentProperties]);
 
   useEffect(() => {
     getMyProperties();

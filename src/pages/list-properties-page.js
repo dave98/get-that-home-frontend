@@ -48,11 +48,15 @@ const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
   }, [currentPage]);
 
   useEffect(() => {
-    getFilteredProperties(filters)
-      .then(setCurrentProperties)
-      .catch(console.log);
-    setCurrentPage(1);
-  }, [filters, setCurrentProperties]);
+    if (currentProperties.length === 0) {
+      getFilteredProperties(filters)
+        .then(setCurrentProperties)
+        .catch(console.log);
+      setCurrentPage(1);
+    } else {
+      return;
+    }
+  }, [filters, setCurrentProperties, currentProperties]);
 
   useEffect(() => {
     if (clearFilters) {
