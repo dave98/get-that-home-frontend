@@ -7,36 +7,65 @@ import { AboutPropertycontainer,
           ShowAddressContainer,
           ShowAddressContainer2,
           ShowDetailsContainer,
+          ShowDetailsMiniContainer,
           ShowPropertyDataWapper } from "./style"
 
-const ShowPropertyData = ({property}) => {
-
+const ShowPropertyData = ({ 
+    address = "Default direction", 
+    rentAmount = 2000, 
+    maintenance = 100, 
+    bedrooms = 7, 
+    bathrooms = 7, 
+    area = 120,
+    petsAllowed = true, 
+    about = "Default description" 
+}) => {
   return (
     <ShowPropertyDataWapper>
+      
       <ShowAddressContainer>
+
         <ShowAddressContainer2>
-          <CardTitle>Francisco de Paula Ugarriza 27</CardTitle>
-          <CardTitle><BiDollarCircle/>3000</CardTitle>
+          <CardTitle>{address}</CardTitle>
         </ShowAddressContainer2>
+        
         <ShowAddressContainer2>
-          <CardDescription>Miraflores, Lima</CardDescription>
-          <CardDescription>+100</CardDescription>
+          <ShowDetailsMiniContainer>
+              <BiDollarCircle size={25}/>
+              <CardTitle>{rentAmount}</CardTitle>
+          </ShowDetailsMiniContainer>
+          <CardDescription>+{maintenance}</CardDescription>
         </ShowAddressContainer2>
+
       </ShowAddressContainer>               
+      
       <ShowDetailsContainer>
-        <Text><BiBed/>&nbsp;asdasdasd</Text>
-        <Text><BiBath/>&nbsp;asdasdasd</Text>
-        <Text><BiArea/>&nbsp;asdasdasd</Text>
-        <Text><MdPets/>&nbsp;asdasdasd</Text>
+        <ShowDetailsMiniContainer>
+            <BiBed size={25}/>
+            <Text>{bedrooms + " bedrooms"}</Text>
+        </ShowDetailsMiniContainer>
+
+        <ShowDetailsMiniContainer>
+            <BiBath size={25}/>
+            <Text>{bathrooms + " bathrooms"}</Text>
+        </ShowDetailsMiniContainer>
+
+        <ShowDetailsMiniContainer>
+            <BiArea size={25}/>
+            <Text>{area + " m2"}</Text>
+        </ShowDetailsMiniContainer>
+
+        <ShowDetailsMiniContainer>
+            <MdPets size={25}/>
+            <Text>{petsAllowed ? "Yep" : "Sorry... no"}</Text>
+        </ShowDetailsMiniContainer>
       </ShowDetailsContainer>
+
       <AboutPropertycontainer>
         <CardTitle>About this property</CardTitle>
-        <Text>
-          3 Bedroom/2 Bathroom apartment available for ASAP move-in!
-          Apartment features hardwood floors throughout, virtual doorman, Central AC/heat, dishwasher and a microwave. 
-          The kitchen has custom cabinetry and the living room is big enough to fit a dinner table, a couch and a tv set up.
-        </Text>
+        <Text>{about}</Text>
       </AboutPropertycontainer>
+
     </ShowPropertyDataWapper>
   )
 }

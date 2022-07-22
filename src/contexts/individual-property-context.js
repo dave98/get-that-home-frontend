@@ -7,7 +7,7 @@ import { useProperties } from "./properties-context";
 const IndividualPropertyContext = createContext();
 
 const IndividualPropertyProvider = ({children}) => {
-    const {currentProperties, setCurrentProperties, myPropertiesList, setMyPropertiesList} = useProperties();
+    const {myPropertiesList, setMyPropertiesList} = useProperties();
     const [currentOperation, setCurrentOperation] = useState("create") // update
     const [selected, setSelected] = useState(null);
     const [errors, setErrors] = useState(null);
@@ -96,7 +96,7 @@ const IndividualPropertyProvider = ({children}) => {
         return await individualProperty.showProperty(propertyId)
             .then(property => {
                 setSelected(property);
-                //navigate("/property/edit") // Change to show page
+                navigate("/property/show") // Change to show page
             })
             .catch(errors => {
                 console.log("Property cannot be shown", errors);

@@ -9,7 +9,7 @@ import { PropertyProvider } from "./contexts/properties-context";
 import LandingPage from "./pages/landing-page";
 import ListProperties from "./pages/list-properties-page";
 import LoginPage from "./pages/login-page";
-import ShowProperty from "./pages/show-property";
+import ShowProperty from "./pages/show-property-page";
 import SignUpPage from "./pages/signup-page";
 import { IndividualPropertyProvider } from "./contexts/individual-property-context";
 import MyProperties from "./pages/my-properties";

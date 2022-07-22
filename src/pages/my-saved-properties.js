@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import { Heading } from "../components/typography";
 import { useAuth } from "../contexts/auth-context";
+import { useIndividualProperty } from "../contexts/individual-property-context";
 import { useProperties } from "../contexts/properties-context";
 import { FriendlyImage, ListPropertiesWrapper, LostImageContainer, LostImageHelperText, MyPropertiesTab, MyPropertiesTabsContainer, MyPropertiesTabText, PropertyList } from "./pages-styles";
 
@@ -10,6 +11,7 @@ export default function MySavedProperties(){
     const {role} = useAuth()
     const navigate = useNavigate();
     const {myFavoritePropertiesList, myContactedPropertiesList} = useProperties()
+    const {showProperty} = useIndividualProperty();
     const [tabFilter, setTabFilter] = useState("favorites") // favorites - contacted
     const [filteredData, setFilteredData] = useState([])
 
@@ -76,6 +78,7 @@ export default function MySavedProperties(){
                                         address={property.address}
                                         cover={property.base_image_url}
                                         index={index}
+                                        onShow={() => { showProperty(property.id)} }
                                     />
                                 )
                             })
