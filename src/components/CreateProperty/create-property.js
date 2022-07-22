@@ -10,6 +10,7 @@ import CustomRadio from "../MicroComponents/custom-radio";
 import CustomText from "../MicroComponents/custom-text";
 import { 
     CreatePropertyFormContainer, 
+    CreatePropertyFormHelperText, 
     CreatePropertyFormImageContainer, 
     CreatePropertyFormImageImage, 
     CreatePropertyFormImageImagesContainer, 
@@ -17,6 +18,7 @@ import {
     CreatePropertyFormImageInputTitle, 
     CreatePropertyFormImageTitle, 
     CreatePropertyFormPetsHelperText, 
+    CreatePropertyFormPetsHelperTextContainer, 
     CreatePropertyFormPropertyConfigContainer, 
     CreatePropertyFormTitle, 
     PropertyFormFriendlyImage} from "./style";
@@ -34,13 +36,13 @@ export default function CreatePropertyForm(){
                 bedrooms: selected.bedrooms,
                 bathrooms: selected.bathrooms,
                 area: selected.area,
-                petsAllowed: selected.petsAllowed,
+                petsAllowed: selected.petsAllowed ? "pets allowed" : null,
                 about: selected.about,
                 images: selected.images_url,
             }
         }else{
             return {
-                operationType: "rent",
+                operationType: "",
                 address: "",
                 rentAmount: "",
                 maintenance: "",
@@ -61,7 +63,7 @@ export default function CreatePropertyForm(){
         const errors = {};
         console.log(values);
         if(!values.operationType){
-            errors.operationType = "A operation type is required";
+            errors.operationType = "❌  An operation type is required";
         }
         if(!values.address){
             errors.address= "❌ An address is required in order to proceed";
@@ -143,16 +145,15 @@ export default function CreatePropertyForm(){
                                 :  <CreatePropertyFormTitle>Edit a property thing</CreatePropertyFormTitle>
                         }
                         
-                        <Input
-                            type="text"
-                            label="OPERATION TYPE"
+                        <CustomRadio
+                            mainLabel="OPERATION TYPE"
                             name="operationType"
-                            placeholder={"Operation type"}
+                            labels={["Rent", "Sale"]}
                             value={values.operationType}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            isTouched={touched.operationType}
                             error={errors.operationType}
+                            errorDirection="row"
                         />
                         
                         <CustomInput
@@ -237,7 +238,7 @@ export default function CreatePropertyForm(){
                                 error={errors.area}
                             />
                         </CreatePropertyFormPropertyConfigContainer>
-                        <CreatePropertyFormPetsHelperText>
+                        <CreatePropertyFormPetsHelperTextContainer>
                             <CustomRadio 
                                 name="petsAllowed" 
                                 labels={["Pets Allowed"]}
@@ -245,10 +246,12 @@ export default function CreatePropertyForm(){
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
-                            <p>
-                                Allowing pets increase the likehood of renters liking the property by 9001%. It also makes you a better person
-                            </p>
-                        </CreatePropertyFormPetsHelperText>
+
+                            <CreatePropertyFormHelperText>
+                                Allowing pets increase the likehood of renters liking the property by 9001%. It also makes you a better person.
+                            </CreatePropertyFormHelperText>
+                            
+                        </CreatePropertyFormPetsHelperTextContainer>
                         <CustomText 
                             name="about"
                             label="ABOUT THIS PROPERTY" 

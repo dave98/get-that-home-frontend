@@ -102,17 +102,19 @@ export const ButtonsContainer = styled.div`
   gap: 0.5rem;
 `;
 
-export const PropertyList = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  gap: 2rem 5rem;
-`;
+export const PropertyList = styled.div( 
+  ({justify = "center"}) =>  ({
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: justify,
+    alignItems: "center",
+    width: "100%",
+    margin: "1rem 0 1rem 0",
+    gap: "2rem 5rem"
+  })
+)
+
 
 export const EditPropertyWrapper = styled.div({
   height: "89vh",

@@ -36,9 +36,9 @@ const IndividualPropertyProvider = ({children}) => {
     async function createProperty(propertyData){
         return await individualProperty.createProperty(propertyData)
             .then(property => {
+                setMyPropertiesList([...myPropertiesList, propertyFormatter(property)])
                 setSelected(property);
-                setCurrentProperties([...currentProperties, propertyFormatter(property)]);
-                navigate("/properties");
+                navigate("/my-properties");
             })
             .catch(errors => {
                 console.log("Property error creation: ", errors);
@@ -48,11 +48,11 @@ const IndividualPropertyProvider = ({children}) => {
     async function updateProperty(propertyId, propertyData){
         return await individualProperty.updateProperty(propertyId, propertyData)
             .then(property => {
+                let tMyPropertiesList = myPropertiesList.filter(p => p.id !== property.id);
+                tMyPropertiesList.push(propertyFormatter(property));
+                setMyPropertiesList(tMyPropertiesList);
                 setSelected(property);
-                let tCurrentProperties = currentProperties.filter(cProperty => cProperty.id !== property.id);
-                tCurrentProperties.push(propertyFormatter(property));
-                setCurrentProperties(tCurrentProperties);
-                navigate("/properties");
+                navigate("/my-properties");
             })
             .catch(errors => {
                 console.log("Property error update", errors) 

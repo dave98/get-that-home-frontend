@@ -58,31 +58,35 @@ export default function MySavedProperties(){
                 Properties founded {"(" + filteredData.length + ")"}
             </Heading>
 
-            <PropertyList>
                 {
                     filteredData.length
-                    ? filteredData.map((property, index) => {
-                        return (
-                            <PropertyCard
-                                key={property.id}
-                                transactionType={property.operationType}
-                                propertyType={property.propertyType}
-                                price={property.rentAmount}
-                                beds={property.bedrooms}
-                                baths={property.bathrooms}
-                                sqmeters={property.area}
-                                address={property.address}
-                                cover={property.base_image_url}
-                                index={index}
-                            />
-                        )
-                    })
-                    : <LostImageContainer height={500} initial={{scale: 0}} animate={{scale: 1}}>
+                    ? 
+                    <PropertyList justify="flex-start">
+                        {
+                            filteredData.map((property, index) => {
+                                return (
+                                    <PropertyCard
+                                        key={property.id}
+                                        transactionType={property.operationType}
+                                        propertyType={property.propertyType}
+                                        price={property.rentAmount}
+                                        beds={property.bedrooms}
+                                        baths={property.bathrooms}
+                                        sqmeters={property.area}
+                                        address={property.address}
+                                        cover={property.base_image_url}
+                                        index={index}
+                                    />
+                                )
+                            })
+                        }
+                    </PropertyList>
+                    : 
+                    <LostImageContainer height={500} initial={{scale: 0}} animate={{scale: 1}}>
                         <FriendlyImage src="/empty-street-rafiki.svg"/>
                         <LostImageHelperText>Well... apparently there is nothing to show</LostImageHelperText>
                     </LostImageContainer>
                 }
-            </PropertyList>
         </ListPropertiesWrapper>
     )
 }

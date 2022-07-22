@@ -40,6 +40,7 @@ export default function CustomRadio({
                   value={l.toLowerCase()}
                   onBlur={onBlur}
                   onChange={onChange}
+                  checked={l.toLowerCase() === value}
                   {...props}
                 />
                 <RadioInputSpan />

@@ -72,38 +72,43 @@ export default function MyProperties(){
             <Heading weight={500} size="xs">
                  Your properties:
             </Heading>
-            <PropertyList>
-                {   filteredData.length 
-                        ? filteredData.map((property, index) => {
-                            return (
-                                <PropertyCard
-                                    key={property.id}
-                                    transactionType={property.operationType}
-                                    propertyType={property.propertyType}
-                                    price={property.rentAmount}
-                                    beds={property.bedrooms}
-                                    baths={property.bathrooms}
-                                    sqmeters={property.area}
-                                    address={property.address}
-                                    cover={property.base_image_url}
-                                    index={index}
-                                    owned
-                                    closed={ tabFilter === "active" ? false : true }
-                                    onShow={() => { showProperty(property.id) }}
-                                    onEdit={() => { showToUpdateProperty(property.id)  }}
-                                    onClosed={() => { updateClosedStateProperty(property.id, true) }} // Mark as closed
-                                    onRestore={() => { updateClosedStateProperty(property.id, false) } }
-                                    onDelete={() => { destroyProperty(property.id)} }
-                                />
-                            )
-                        })
+
+                {   
+                    filteredData.length 
+                        ? 
+                        <PropertyList justify="flex-start">
+                            {
+                                filteredData.map((property, index) => {
+                                    return (
+                                        <PropertyCard
+                                            key={property.id}
+                                            transactionType={property.operationType}
+                                            propertyType={property.propertyType}
+                                            price={property.rentAmount}
+                                            beds={property.bedrooms}
+                                            baths={property.bathrooms}
+                                            sqmeters={property.area}
+                                            address={property.address}
+                                            cover={property.base_image_url}
+                                            index={index}
+                                            owned
+                                            closed={ tabFilter === "active" ? false : true }
+                                            onShow={() => { showProperty(property.id) }}
+                                            onEdit={() => { showToUpdateProperty(property.id)  }}
+                                            onClosed={() => { updateClosedStateProperty(property.id, true) }} // Mark as closed
+                                            onRestore={() => { updateClosedStateProperty(property.id, false) } }
+                                            onDelete={() => { destroyProperty(property.id)} }
+                                        />
+                                    )
+                                })
+                            }
+                        </PropertyList>
                         :
                         <LostImageContainer height={500} initial={{scale: 0}} animate={{scale: 1}}>
                             <FriendlyImage src="/empty-street-rafiki.svg"/>
                             <LostImageHelperText>Well... apparently there is nothing to show</LostImageHelperText>
                         </LostImageContainer>
                 }
-            </PropertyList>
         </ListPropertiesWrapper>
     )
 }

@@ -114,7 +114,7 @@ const Navbar = ({ isAuth, setIsAuth }) => {
             image={role === "seeker" ? "/house-searching-cuate.svg" : "/for-sale-cuate.svg"}
             rotate
             onClick={() => {
-              setRole( role === "seeker" ? "lanlord" : "seeker")
+              setRole( role === "seeker" ? "landlord" : "seeker")
             }}
           >
             {role.toUpperCase()}

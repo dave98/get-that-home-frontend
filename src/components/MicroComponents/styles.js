@@ -33,6 +33,7 @@ export const ErrorContainer = styled.div({
       return {
         flexDirection: "row",
         alignItems: "center",
+        justifyContent: "space-between",
       }
     }else{
       return {
@@ -100,7 +101,7 @@ export const CustomErrorMessage = styled.p`
 export const RadioInputMainContainer = styled.div({
   display: "flex",
   flexDirection: "column",
-  gap: 4,
+  gap: 6,
 })
 
 export const RadioInputMainLabel = styled.p(`

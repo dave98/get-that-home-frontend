@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { colors, typography } from "../../style";
+import { fonts } from "../../style/typography";
 
 export const CreatePropertyFormTitle = styled.h1`
     ${typography.head.md};
@@ -25,9 +26,16 @@ export const CreatePropertyFormPropertyConfigContainer = styled.div({
     alignItems: "flex-start"
 })
 
-export const CreatePropertyFormPetsHelperText = styled.div({
+export const CreatePropertyFormPetsHelperTextContainer = styled.div({
     display: "flex",
     flexDirection: "column",
+})
+
+export const CreatePropertyFormHelperText = styled.p({
+    fontSize: 12,
+    fontFamily: fonts.secondary,
+    color: colors.grays.light,
+    fontWeight: 400,
 })
 
 export const CreatePropertyFormImageContainer = styled.div({
