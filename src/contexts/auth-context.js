@@ -7,13 +7,9 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  // const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [role, setRole] = useState("seeker"); // "seeker" - "landlord"
   const navigate = useNavigate();
-
-  //useEffect(() => {
-  //  user !== null && getUser().then(setUser).catch(setError);
-  //}, [user]);
 
   useEffect(() => {
     getUser()
@@ -55,6 +51,8 @@ const AuthProvider = ({ children }) => {
     logout,
     join,
     error,
+    role, 
+    setRole,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

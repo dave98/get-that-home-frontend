@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { colors, typography } from "../style";
+import { fonts } from "../style/typography";
 
 // LoginPage
 export const LoginPageWrapper = styled.div`
@@ -134,10 +135,11 @@ export const LostImageContainer = styled(motion.div)({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  height: 800,
   width: "auto",
   marginTop: "5%",
-})
+}, ({height}) => ({
+  height: height ? height : 800,
+}))
 
 export const LostImageHelperText = styled.p({
   fontSize: 25,
@@ -151,6 +153,27 @@ export const FriendlyImage = styled.img({
 })
 
 // MyPropertiesStyles
-export const MyPropertiesContainer = styled.div({
-  
+export const MyPropertiesTabsContainer = styled.div({
+  display: "flex",
+  flexDirection: "row",
+  gap: 24,
+  width: "100%",
+  padding: "20px 0",
+})
+
+export const MyPropertiesTab = styled(motion.div)({
+  paddingBottom: 6,
+  color: "gray",
+  cursor: "pointer",
+}, ({active}) => ({
+  borderBottom: active ? "2px solid red" : "none",
+  color: active ? "black" : "gray",
+}))
+
+export const MyPropertiesTabText = styled.p({
+  fontSize: 18,
+  fontFamily: fonts.primary,
+  textTransform: "uppercase",
+  letterSpacing: 1.25,
+  color: "inherit",
 })

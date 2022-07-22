@@ -7,7 +7,7 @@ import { useProperties } from "./properties-context";
 const IndividualPropertyContext = createContext();
 
 const IndividualPropertyProvider = ({children}) => {
-    const {currentProperties, setCurrentProperties} = useProperties();
+    const {currentProperties, setCurrentProperties, myPropertiesList, setMyPropertiesList} = useProperties();
     const [currentOperation, setCurrentOperation] = useState("create") // update
     const [selected, setSelected] = useState(null);
     const [errors, setErrors] = useState(null);
@@ -46,24 +46,39 @@ const IndividualPropertyProvider = ({children}) => {
     }
 
     async function updateProperty(propertyId, propertyData){
-        console.log(currentProperties);
         return await individualProperty.updateProperty(propertyId, propertyData)
             .then(property => {
                 setSelected(property);
-                
-                let tCurrentProperties = currentProperties.filter(cProperty => cProperty.id != property.id);
+                let tCurrentProperties = currentProperties.filter(cProperty => cProperty.id !== property.id);
                 tCurrentProperties.push(propertyFormatter(property));
-                
                 setCurrentProperties(tCurrentProperties);
                 navigate("/properties");
             })
             .catch(errors => {
-                console.log("Property error update", errors)
+                console.log("Property error update", errors) 
+            })
+    }
+
+    async function updateClosedStateProperty(propertyId, closed){
+        return await individualProperty.updateClosedProperty(propertyId, { closed: closed } )
+            .then(property => {
+                let tMyPropertiesList = myPropertiesList.filter(p => p.id !== property.id);
+                tMyPropertiesList.push(propertyFormatter(property))
+                setMyPropertiesList(tMyPropertiesList);
+            })
+            .catch(errors => {
+                console.log("Property error on closed update", errors)
             })
     }
 
     async function destroyProperty(propertyId){
-        
+        return await individualProperty.deleteProperty(propertyId)
+            .then(() => {
+                setMyPropertiesList(myPropertiesList.filter(p => p.id !== propertyId));
+            })
+            .catch((errors) => {
+                console.log("Property error on destroying: ", errors)
+            })
     }
 
     async function showToUpdateProperty(propertyId){
@@ -100,6 +115,7 @@ const IndividualPropertyProvider = ({children}) => {
         destroyProperty,
         showProperty,
         showToUpdateProperty,
+        updateClosedStateProperty,
     }}>
         {children}
     </IndividualPropertyContext.Provider>

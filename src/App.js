@@ -14,6 +14,7 @@ import ShowProperty from "./pages/show-property";
 import SignUpPage from "./pages/signup-page";
 import { IndividualPropertyProvider } from "./contexts/individual-property-context";
 import MyProperties from "./pages/my-properties";
+import MySavedProperties from "./pages/my-saved-properties";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ const App = () => {
     <MainWrapper>
       <PropertyProvider>
         <IndividualPropertyProvider>
-          <Navbar isAuth={isAuth} setIsAuth={setIsAuth} role={"seller"} />
+          <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="login" element={<LoginPage />} />
@@ -49,6 +50,7 @@ const App = () => {
               </Route>
               <Route path="properties" element={<ListProperties />} />
               <Route path="my-properties" element={<MyProperties/> } />
+              <Route path="my-saved-properties" element={<MySavedProperties/> } />
               <Route path="profile" element={<div>Profile</div>} />
               <Route path="property" >
                 <Route  path="show" element={ <ShowProperty/>  }/>

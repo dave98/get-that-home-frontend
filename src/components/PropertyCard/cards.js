@@ -39,6 +39,7 @@ const PropertyCard = ({
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       whileHover={{ scale: 1.05 }}
+      whileTap={{scale: owned ? 1 : 1.1 }}
     >
       <div onClick={onShow}>
         <CardImg cover={cover}>

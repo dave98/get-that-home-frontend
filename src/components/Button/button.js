@@ -10,11 +10,14 @@ const Button = ({
   margin,
   onClick,
   type = "button",
+  animationOnAppear = false,
   ...others
 }) => {
   return (
     <>
       <CustomizableButton
+        initial={{scale: animationOnAppear ? 0 : 1}}
+        animate={{scale: 1}}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         buttontype={buttontype}
