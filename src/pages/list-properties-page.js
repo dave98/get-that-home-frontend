@@ -196,7 +196,7 @@ const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
           {currentProperties.length} Properties found
         </Heading>
         <PropertyList>
-          {properties.map((property) => (
+          {properties.map((property, index) => (
             <PropertyCard
               key={property.id}
               transactionType={property.transactionType}
