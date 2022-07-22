@@ -55,12 +55,12 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
             <CustomSelect
               label={"I'M LOOKING FOR"}
               name={"property_type"}
-              options={["aparment", "house", "Office"]}
+              options={["aparment", "house"]}
             />
             <CustomSelect
               label={"I WANT TO"}
               name={"transaction_type"}
-              options={["rent", "sell"]}
+              options={["rent", "sale"]}
             />
             <PlacesAutocomplete
               value={address}
@@ -96,7 +96,7 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
                 </InputHeroContainer>
               )}
             </PlacesAutocomplete>
-            <Button>SEARCH</Button>
+            <Button type="submit">SEARCH</Button>
           </HeroSearchBar>
         </HeroContainer>
       </HeroWrapper>

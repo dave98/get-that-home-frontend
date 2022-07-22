@@ -166,6 +166,14 @@ export const FriendlyImage = styled.img({
   borderRadius: 8,
 });
 
+export const FindHomeInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+`;
+
 // MyPropertiesStyles
 export const MyPropertiesTabsContainer = styled.div({
   display: "flex",

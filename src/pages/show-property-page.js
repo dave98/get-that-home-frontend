@@ -43,7 +43,6 @@ export default function ShowProperty() {
               country={country}
             />
           </ShowPropertyContainer>
-
           <PropertyMutableComponent />
         </ShowPropertyWrapper>
       ) : (
@@ -57,3 +56,37 @@ export default function ShowProperty() {
     </Fragment>
   );
 }
+  return (
+    <Fragment>
+      {
+        selected
+          ?
+            <ShowPropertyWrapper>
+              <ShowPropertyContainer>
+                  <PropertyImageSlice imgs={selected.images_url}/>
+                  <ShowPropertyData 
+                    address={selected.address}
+                    rentAmount={selected.rentAmount}
+                    maintenance={selected.maintenance}
+                    bedrooms={selected.bedrooms}
+                    bathrooms={selected.bathrooms}
+                    area={selected.area}
+                    petsAllowed={selected.area}
+                    about={selected.about}
+                  />
+                  <PropertyLocation />
+              </ShowPropertyContainer>
+
+              <PropertyMutableComponent propertyId={selected.id}/>
+
+            </ShowPropertyWrapper>
+          :
+            <LostImageContainer height={700}>
+              <FriendlyImage src="/lost-bro.svg"/>
+              <LostImageHelperText>Well... something was supossed to appear here </LostImageHelperText>
+            </LostImageContainer>
+      }
+    </Fragment>
+  )
+}
+  

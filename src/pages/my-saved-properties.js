@@ -44,6 +44,17 @@ export default function MySavedProperties() {
       navigate("/my-properties");
     }
   }, [role]);
+  
+  useEffect(() => {
+    let tList = []
+    if(tabFilter === "favorites"){
+      tList = myFavoritePropertiesList.map(lp => { return lp.property} ); // Property are nested with likeId
+    }else{
+      tList = myContactedPropertiesList
+    }
+    setFilteredData(tList)
+  }, [tabFilter, myFavoritePropertiesList, myContactedPropertiesList])
+
 
   return (
     <ListPropertiesWrapper>

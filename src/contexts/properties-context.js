@@ -23,8 +23,12 @@ const PropertyProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProperties().then(setCurrentProperties).catch(setError);
-  }, []);
+    if (currentProperties.length === 0) {
+      getProperties().then(setCurrentProperties).catch(setError);
+    } else {
+      return;
+    }
+  }, [currentProperties]);
 
   useEffect(() => {
     getMyProperties();
@@ -82,7 +86,9 @@ const PropertyProvider = ({ children }) => {
     myPropertiesList, 
     setMyPropertiesList,
     myFavoritePropertiesList,
+    setMyFavoritePropertiesList,
     myContactedPropertiesList,
+    setMyContactedPropertiesList,
   };
 
   return (

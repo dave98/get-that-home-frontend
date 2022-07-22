@@ -61,7 +61,6 @@ export default function CreatePropertyForm(){
 
     function validate(values){
         const errors = {};
-        console.log(values);
         if(!values.operationType){
             errors.operationType = "❌  An operation type is required";
         }
@@ -97,7 +96,6 @@ export default function CreatePropertyForm(){
     }
 
     async function handleSubmit(values){
-        console.log("Values: ", values);
         const formData = new FormData();
         formData.append("property[operationType]", values.operationType);
         formData.append("property[address]", values.address);

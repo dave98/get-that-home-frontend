@@ -1,6 +1,6 @@
-import { ButtonIconContainer, ButtonIconImage, ButtonIconLabel, ButtonIconLabelContainer } from "./style";
+import { ButtonIconContainer, ButtonIconIcon, ButtonIconImage, ButtonIconLabel, ButtonIconLabelContainer } from "./style";
 
-export default function ButtonIcon({radius, rotate, children, image, onClick}){
+export default function ButtonIcon({radius, rotate, duration, children, image, icon, onClick}){
     return (
         <ButtonIconContainer 
             radius={radius}
@@ -17,7 +17,20 @@ export default function ButtonIcon({radius, rotate, children, image, onClick}){
                             rotate: -270,
                             opacity: 0
                         } : null}
+                        transition={{duration: duration ? duration : 0.3}}
                     />
+                    : icon 
+                    ? 
+                    <ButtonIconIcon
+                        whileTap={ rotate ? {
+                            scale: 0.2,
+                            rotate: -270,
+                            opacity: 0
+                        } : null}
+                        transition={{duration: duration ? duration : 0.3}}
+                    >
+                        {icon}
+                    </ButtonIconIcon>
                     : null
             }
             <ButtonIconLabelContainer>

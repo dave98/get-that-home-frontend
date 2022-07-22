@@ -5,6 +5,8 @@ import { colors } from "../../style";
 export const ButtonIconContainer = styled(motion.div)(({radius}) => ({
     width: radius ? radius : 100,
     height: radius ? radius : 100,
+    maxHeight: radius ? radius : 100,
+    maxWidth: radius ? radius : 100, 
     backgroundColor: "transparent",
     borderRadius: "50%",
     position: "relative",
@@ -16,6 +18,8 @@ export const ButtonIconImage = styled(motion.img)({
     width: "100%",
     objectFit: "cover",
 })
+
+export const ButtonIconIcon = styled(motion.div)({})
 
 export const ButtonIconLabelContainer = styled.div({
     position: "absolute",
