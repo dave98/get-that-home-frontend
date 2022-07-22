@@ -4,7 +4,10 @@ import {
   ListPropertiesWrapper,
   ButtonsContainer,
   PropertyList,
+  FindHomeInputContainer,
 } from "./pages-styles";
+import PlacesAutocomplete from "react-places-autocomplete";
+import scriptLoader from "react-async-script-loader";
 import { RiSearchLine } from "react-icons/ri";
 import { FaChevronDown } from "react-icons/fa";
 import Button from "../components/Button/button";
@@ -16,8 +19,9 @@ import PaginationButtons from "../components/MicroComponents/pagination-buttons"
 import { useProperties } from "../contexts/properties-context";
 import FilterModal from "../components/FiltersModal/filters-modal";
 import { getFilteredProperties } from "../services/properties-service";
+import { SugestionsItem, SugestionsWrapper } from "../components/Hero/style";
 
-const ListProperties = () => {
+const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
   const { currentProperties, setCurrentProperties } = useProperties();
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 9;
@@ -80,108 +84,145 @@ const ListProperties = () => {
     setIsOpen(false);
   };
 
-  return (
-    <ListPropertiesWrapper>
-      <FiltersHead>
-        <CustomInput
-          name="search"
-          placeholder="Find a place you like"
-          icon={<RiSearchLine size={22} />}
-        />
-        <ButtonsContainer>
-          <Button
-            onClick={() => {
-              setTypeOfModal("price");
-              setIsOpen(!isOpen);
-            }}
+  if (isScriptLoaded && isScriptLoadSucceed) {
+    return (
+      <ListPropertiesWrapper>
+        <FiltersHead>
+          <PlacesAutocomplete
+            value={filters.address}
+            onChange={(address) => setFilters({ ...filters, address })}
+            onSelect={(address) => setFilters({ ...filters, address })}
           >
-            PRICE
-          </Button>
-          <Button
-            onClick={() => {
-              setTypeOfModal("propertyType");
-              setIsOpen(!isOpen);
+            {({
+              getInputProps,
+              suggestions,
+              getSuggestionItemProps,
+              loading,
+            }) => (
+              <FindHomeInputContainer>
+                <CustomInput
+                  name="search"
+                  placeholder="Find a place you like"
+                  icon={<RiSearchLine size={22} />}
+                  {...getInputProps({
+                    placeholder: "Find a place you like",
+                  })}
+                />
+                <SugestionsWrapper>
+                  {loading && <div>Loading...</div>}
+                  {suggestions.map((suggestion, i) => {
+                    return (
+                      <SugestionsItem
+                        key={`${i}-itemID`}
+                        {...getSuggestionItemProps(suggestion)}
+                      >
+                        {suggestion.description}
+                      </SugestionsItem>
+                    );
+                  })}
+                </SugestionsWrapper>
+              </FindHomeInputContainer>
+            )}
+          </PlacesAutocomplete>
+          <ButtonsContainer>
+            <Button
+              onClick={() => {
+                setTypeOfModal("price");
+                setIsOpen(!isOpen);
+              }}
+            >
+              PRICE
+            </Button>
+            <Button
+              onClick={() => {
+                setTypeOfModal("propertyType");
+                setIsOpen(!isOpen);
+              }}
+            >
+              PROPERTY TYPE
+            </Button>
+            <Button
+              onClick={() => {
+                setTypeOfModal("beds");
+                setIsOpen(!isOpen);
+              }}
+            >
+              BEDS & BATHS
+            </Button>
+            <Button
+              righticon={<FaChevronDown />}
+              onClick={() => {
+                setTypeOfModal("more");
+                setIsOpen(!isOpen);
+              }}
+            >
+              MORE
+            </Button>
+            <Button
+              buttontype={"line"}
+              onClick={() => {
+                setClearFilters(true);
+              }}
+            >
+              CLEAR FILTERS
+            </Button>
+          </ButtonsContainer>
+          <CustomSelect
+            variant="search"
+            options={["Buying & Renting", "Buying", "Renting"]}
+            placeholder="Transaction Type"
+            name="transactionType"
+            value={filters.transactionType}
+            onChange={(e) => {
+              setFilters({
+                ...filters,
+                transactionType: e.target.value === "Buying" ? "sale" : "rent",
+              });
             }}
-          >
-            PROPERTY TYPE
-          </Button>
-          <Button
-            onClick={() => {
-              setTypeOfModal("beds");
-              setIsOpen(!isOpen);
-            }}
-          >
-            BEDS & BATHS
-          </Button>
-          <Button
-            righticon={<FaChevronDown />}
-            onClick={() => {
-              setTypeOfModal("more");
-              setIsOpen(!isOpen);
-            }}
-          >
-            MORE
-          </Button>
-          <Button
-            buttontype={"line"}
-            onClick={() => {
-              setClearFilters(true);
-            }}
-          >
-            CLEAR FILTERS
-          </Button>
-        </ButtonsContainer>
-        <CustomSelect
-          variant="search"
-          options={["Buying & Renting", "Buying", "Renting"]}
-          placeholder="Transaction Type"
-          name="transactionType"
-          value={filters.transactionType}
-          onChange={(e) => {
-            setFilters({
-              ...filters,
-              transactionType: e.target.value === "Buying" ? "sale" : "rent",
-            });
-          }}
-        />
-      </FiltersHead>
-
-      <FilterModal
-        open={isOpen}
-        onClose={handleClose}
-        filters={filters}
-        onFilterChange={setFilters}
-        variant={typeOfModal}
-      />
-
-      <Heading weight={500} size="xs">
-        {currentProperties.length} Properties found
-      </Heading>
-      <PropertyList>
-        {properties.map((property) => (
-          <PropertyCard
-            key={property.id}
-            transactionType={property.transactionType}
-            propertyType={property.propertyType}
-            price={property.rentAmount}
-            beds={property.bedrooms}
-            baths={property.bathrooms}
-            sqmeters={property.area}
-            address={property.address}
-            cover={property.base_image_url}
           />
-        ))}
-      </PropertyList>
-      {currentProperties.length > 9 && (
-        <PaginationButtons
-          totalPages={pagesParser(currentProperties.length)}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          paginate={paginate}
+        </FiltersHead>
+
+        <FilterModal
+          open={isOpen}
+          onClose={handleClose}
+          filters={filters}
+          onFilterChange={setFilters}
+          variant={typeOfModal}
         />
-      )}
-    </ListPropertiesWrapper>
-  );
+
+        <Heading weight={500} size="xs">
+          {currentProperties.length} Properties found
+        </Heading>
+        <PropertyList>
+          {properties.map((property) => (
+            <PropertyCard
+              key={property.id}
+              transactionType={property.transactionType}
+              propertyType={property.propertyType}
+              price={property.rentAmount}
+              beds={property.bedrooms}
+              baths={property.bathrooms}
+              sqmeters={property.area}
+              address={property.address}
+              cover={property.base_image_url}
+            />
+          ))}
+        </PropertyList>
+        {currentProperties.length > 9 && (
+          <PaginationButtons
+            totalPages={pagesParser(currentProperties.length)}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            paginate={paginate}
+          />
+        )}
+      </ListPropertiesWrapper>
+    );
+  } else {
+    return <h1>Loading...</h1>;
+  }
 };
 
-export default ListProperties;
+export default scriptLoader([
+  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_JS_MAPS_API}&libraries=places`,
+])(ListProperties);
