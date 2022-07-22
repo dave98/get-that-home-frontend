@@ -56,11 +56,13 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
               label={"I'M LOOKING FOR"}
               name={"property_type"}
               options={["aparment", "house"]}
+              onChange={handleSubmit}
             />
             <CustomSelect
               label={"I WANT TO"}
               name={"transaction_type"}
               options={["rent", "sale"]}
+              onChange={handleSubmit}
             />
             <PlacesAutocomplete
               value={address}

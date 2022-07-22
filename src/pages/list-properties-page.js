@@ -48,15 +48,11 @@ const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
   }, [currentPage]);
 
   useEffect(() => {
-    if (currentProperties.length === 0) {
-      getFilteredProperties(filters)
-        .then(setCurrentProperties)
-        .catch(console.log);
-      setCurrentPage(1);
-    } else {
-      return;
-    }
-  }, [filters, setCurrentProperties, currentProperties]);
+    getFilteredProperties(filters)
+      .then(setCurrentProperties)
+      .catch(console.log);
+    setCurrentPage(1);
+  }, [filters, setCurrentProperties]);
 
   useEffect(() => {
     if (clearFilters) {
@@ -212,7 +208,9 @@ const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
               address={property.address}
               cover={property.base_image_url}
               index={index}
-              onShow={() => { showProperty(property.id) }}
+              onShow={() => {
+                showProperty(property.id);
+              }}
             />
           ))}
         </PropertyList>
