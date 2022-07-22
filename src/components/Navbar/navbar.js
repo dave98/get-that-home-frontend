@@ -13,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { useEffect } from "react";
+import ButtonIcon from "../ButtonIcon/buttonIcon";
 
 const icons = {
   login: <RiUserReceivedFill size={18} />,
@@ -108,15 +109,19 @@ const Navbar = ({ isAuth, setIsAuth }) => {
         </Button>
         {
           isAuth 
-          ? <Button
+          ? <ButtonIcon 
+            radius={60} 
+            image={role === "seeker" ? "/house-searching-cuate.svg" : "/for-sale-cuate.svg"}
+            rotate
             onClick={() => {
-              setRole(role === "seeker" ? "landlord" : "seeker")
+              setRole( role === "seeker" ? "lanlord" : "seeker")
             }}
           >
             {role.toUpperCase()}
-          </Button>  
+          </ButtonIcon>
           : null
         }
+        
 
       </ButtonsContainer>
     </NavbarContainer>

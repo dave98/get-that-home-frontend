@@ -35,13 +35,30 @@ const PropertyCard = ({
   onDelete = () => {},
   onRestore = () => {},
 }) => {
+
+  const variants = { // Prevents shared animation times  where animate, whileHover, whileTab
+    active: {
+      y: 0,
+      opacity: 1,
+      transition: { delay: index ? (index*0.25) : 0}
+    },
+    hovering: {
+      scale:  owned ? 1.02 : 1.03,
+      transition: {delay: 0.2}
+    },
+    tapping: {
+      scale: owned ? 1 : 1.05,
+      transition: { delay: 0 }
+    }
+  }
+
   return (
     <Container
       initial={{ y: 20, opacity: index ? 0 : 1}}
-      animate={{ y: 0, opacity: 1}}
-      transition={{delay: index ? (index * 0.25) : 0}}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{scale: owned ? 1 : 1.05 }}
+      variants={variants}
+      animate={"active"}
+      whileHover={"hovering"}
+      whileTap={"tapping"}
     >
       <div onClick={onShow}>
         <CardImg cover={cover}>
