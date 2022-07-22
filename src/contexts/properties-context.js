@@ -82,7 +82,9 @@ const PropertyProvider = ({ children }) => {
     myPropertiesList, 
     setMyPropertiesList,
     myFavoritePropertiesList,
+    setMyFavoritePropertiesList,
     myContactedPropertiesList,
+    setMyContactedPropertiesList,
   };
 
   return (

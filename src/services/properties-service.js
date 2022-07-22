@@ -42,6 +42,22 @@ export async function myContactedProperties(){
   return await apiFetch("contacts");
 }
 
+export async function contactWithProperty(propertyId){
+  return await  apiFetch("contacts", { body: {property_id: propertyId}, method: "POST" });
+}
+
+export async function likeProperty(propertyId){
+  return await apiFetch("likes", {body: {property_id: propertyId}, method: "POST"});
+}
+
+export async function deleteLikeProperty(likeId){
+  return await apiFetch("likes/" + likeId, {method: "DELETE" });
+}
+
+export async function reachPropertyUser(propertyId){
+  return await apiFetch("properties/" + propertyId + "/reach-owner");
+}
+
 export const getFilteredProperties = async (filters) => {
   const data = { ...filters };
   const url = new URL(`${BASE_URI}properties/index`);

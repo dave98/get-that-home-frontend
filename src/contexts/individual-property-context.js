@@ -7,7 +7,14 @@ import { useProperties } from "./properties-context";
 const IndividualPropertyContext = createContext();
 
 const IndividualPropertyProvider = ({children}) => {
-    const {myPropertiesList, setMyPropertiesList} = useProperties();
+    const {
+        myPropertiesList, 
+        setMyPropertiesList,
+        myFavoritePropertiesList,
+        setMyFavoritePropertiesList,
+        myContactedPropertiesList,
+        setMyContactedPropertiesList,
+    } = useProperties();
     const [currentOperation, setCurrentOperation] = useState("create") // update
     const [selected, setSelected] = useState(null);
     const [errors, setErrors] = useState(null);
@@ -71,6 +78,44 @@ const IndividualPropertyProvider = ({children}) => {
             })
     }
 
+    async function contactWithProperty(propertyId){
+        return await individualProperty.contactWithProperty(propertyId)
+            .then(property => {
+                setMyContactedPropertiesList([...myContactedPropertiesList, property])
+            })
+            .catch(errors => {
+                console.log("Property error on contact: ", errors);
+            }) 
+    }
+
+    async function likeProperty(propertyId){
+        return await individualProperty.likeProperty(propertyId)
+            .then(propertyLiked => {
+              setMyFavoritePropertiesList([...myFavoritePropertiesList, propertyLiked])  
+            })
+            .catch(errors => {
+                console.log("Property error on like: ", errors);
+            }) 
+    }
+
+    async function destroyLike(likeId, propertyId){
+        return await individualProperty.deleteLikeProperty(likeId)
+        .then(() => {
+            setMyFavoritePropertiesList( myFavoritePropertiesList.filter(p => p.property.id != propertyId) )
+        })
+        .catch((errors) => {
+            console.log("Property error on like destroy: ", errors)
+        })
+    }
+
+    async function reachOwner(propertyId){
+        return await individualProperty.reachPropertyUser(propertyId)
+            .catch((errors) => {
+                console.log("Property owner cannot be reached: ", errors);
+                return null;
+            })
+    }
+
     async function destroyProperty(propertyId){
         return await individualProperty.deleteProperty(propertyId)
             .then(() => {
@@ -116,6 +161,10 @@ const IndividualPropertyProvider = ({children}) => {
         showProperty,
         showToUpdateProperty,
         updateClosedStateProperty,
+        contactWithProperty,
+        likeProperty,
+        destroyLike,
+        reachOwner
     }}>
         {children}
     </IndividualPropertyContext.Provider>

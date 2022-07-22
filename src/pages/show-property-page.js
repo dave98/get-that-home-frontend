@@ -10,10 +10,6 @@ import { FriendlyImage, LostImageContainer, LostImageHelperText, ShowPropertyCon
 export default function ShowProperty(){
     const {selected} = useIndividualProperty();
 
-    useEffect(() => {
-      console.log("Show selected")
-      console.log(selected);
-    }, [selected])
     return (
       <Fragment>
         {
@@ -35,7 +31,7 @@ export default function ShowProperty(){
                     <PropertyLocation />
                 </ShowPropertyContainer>
 
-                <PropertyMutableComponent />
+                <PropertyMutableComponent propertyId={selected.id}/>
 
               </ShowPropertyWrapper>
             :

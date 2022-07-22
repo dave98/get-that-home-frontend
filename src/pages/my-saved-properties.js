@@ -22,7 +22,7 @@ export default function MySavedProperties(){
     useEffect(() => {
         let tList = []
         if(tabFilter === "favorites"){
-            tList = myFavoritePropertiesList;
+            tList = myFavoritePropertiesList.map(lp => { return lp.property} ); // Property are nested with likeId
         }else{
             tList = myContactedPropertiesList
         }

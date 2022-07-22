@@ -21,7 +21,6 @@ const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     const user = await auth.login(credentials).catch(setError);
-    console.log(user);
     if (user) {
       setUser(user);
       navigate("/");
