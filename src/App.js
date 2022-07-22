@@ -6,6 +6,7 @@ import { useAuth } from "./contexts/auth-context";
 import LandingPage from "./pages/landing-page";
 import LoginPage from "./pages/login-page";
 import SignUpPage from "./pages/signup-page";
+// import ShowProperty from "./pages/show-property-page";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="properties" element={<div>Properties</div>} />
         <Route path="profile" element={<div>Profile</div>} />
       </Routes>
+      {/* <ShowProperty /> */}
     </MainWrapper>
   );
 };
