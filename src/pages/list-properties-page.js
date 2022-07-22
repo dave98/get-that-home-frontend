@@ -20,7 +20,7 @@ import { getFilteredProperties } from "../services/properties-service";
 
 const ListProperties = () => {
   const { showProperty } = useIndividualProperty();
-  const { currentProperties } = useProperties();
+  const { currentProperties, setCurrentProperties } = useProperties();
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 9;
   const [filters, setFilters] = useState({
@@ -44,6 +44,7 @@ const ListProperties = () => {
   }, [currentPage]);
 
   useEffect(() => {
+    console.log("Flag")
     getFilteredProperties(filters)
       .then(setCurrentProperties)
       .catch(console.log);
