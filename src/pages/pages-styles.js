@@ -127,8 +127,7 @@ export const EditPropertyWrapper = styled.div({
   scrollBehavior: "smooth",
   padding: "3rem 50px 3rem 200px",
   marginTop: 72,
-})
-
+});
 
 export const FriendlyImageContainer = styled(motion.div)({
   position: "absolute",
@@ -138,12 +137,12 @@ export const FriendlyImageContainer = styled(motion.div)({
   width: "auto",
   "@media(max-width: 1700px)": {
     height: 700,
-    top: "20%"
+    top: "20%",
   },
   "@media(max-width: 1200px)": {
-    display: "none"
-  }
-})
+    display: "none",
+  },
+});
 
 export const LostImageContainer = styled(motion.div)({
   display: "flex",
@@ -165,7 +164,15 @@ export const FriendlyImage = styled.img({
   width: "auto",
   objectFit: "cover",
   borderRadius: 8,
-})
+});
+
+export const FindHomeInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+`;
 
 // MyPropertiesStyles
 export const MyPropertiesTabsContainer = styled.div({
