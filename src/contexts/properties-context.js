@@ -15,8 +15,12 @@ const PropertyProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProperties().then(setCurrentProperties).catch(setError);
-  }, []);
+    if (currentProperties.length === 0) {
+      getProperties().then(setCurrentProperties).catch(setError);
+    } else {
+      return;
+    }
+  }, [currentProperties]);
 
   const filteredProperties = async (filters) => {
     const properties = await getFilteredProperties(filters).catch(console.log);
