@@ -11,6 +11,7 @@ import ListProperties from "./pages/list-properties-page";
 import LoginPage from "./pages/login-page";
 import ShowProperty from "./pages/show-property";
 import SignUpPage from "./pages/signup-page";
+// import ShowProperty from "./pages/show-property-page";
 
 const MainWrapper = styled.div`
   display: flex;
