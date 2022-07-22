@@ -11,6 +11,7 @@ export const SlicesWrapper = styled.div({
   alignItems: "center",
   borderTopLeftRadius: 10,
   borderTopRightRadius: 10,
+  paddingTop: "2rem",
 })
 
 export const ButtonArrow = styled(motion.div)({

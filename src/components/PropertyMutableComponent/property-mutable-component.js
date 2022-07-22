@@ -1,6 +1,6 @@
 import Button from "../Button";
 import { Text } from "../typography"
-import { MutableComponentContainer, MutableComponentWarrper, OwnerInformationContainer, OwnerInformationImage, OwnerInformationImageContainer } from "./style";
+import { MutableComponentContainer, MutableComponentWarrper, OwnerInformationContainer, OwnerInformationImage, OwnerInformationImageContainer, OwnerInformationText } from "./style";
 import { RiDislikeFill, RiDislikeLine, RiHeart3Fill, RiHeart3Line, RiUserReceived2Fill } from "react-icons/ri";
 import { useAuth } from "../../contexts/auth-context";
 import { Fragment, useEffect, useState } from "react";
@@ -89,9 +89,16 @@ const PropertyMutableComponent = ({propertyId}) => {
                         src={ownerInformation.avatar_url ? ownerInformation.avatar_url : "/avatar-1.svg"} 
                       />
                     </OwnerInformationImageContainer>
-                    <Text>{ownerInformation.name}</Text>
-                    <Text>{ownerInformation.email}</Text>
-                    <Text>{ownerInformation.phone}</Text>
+
+                      <OwnerInformationText size={20}>
+                        {ownerInformation.name}
+                      </OwnerInformationText>
+                      <OwnerInformationText>
+                          {ownerInformation.email}
+                      </OwnerInformationText>
+                      <OwnerInformationText>
+                          {ownerInformation.phone}
+                      </OwnerInformationText>
       
                   </OwnerInformationContainer>
                 :

@@ -40,7 +40,7 @@ const PropertyCard = ({
     active: {
       y: 0,
       opacity: 1,
-      transition: { delay: index ? (index*0.25) : 0}
+      transition: { delay: index ? (index*0.15) : 0}
     },
     hovering: {
       scale:  owned ? 1.02 : 1.03,

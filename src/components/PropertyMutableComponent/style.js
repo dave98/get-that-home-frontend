@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../style";
+import { fonts } from "../../style/typography";
 
 export const MutableComponentWarrper = styled.div({
   backgroundColor: colors.grays.shallow,
@@ -49,3 +50,9 @@ export const OwnerInformationImage = styled.img({
   height: "100%",
   objectFit: "cover",
 })
+
+export const OwnerInformationText = styled.p(({size = 15}) => ({
+  fontSize: size,
+  fontFamily: fonts.secondary,
+  textAlign: "center"
+}))
