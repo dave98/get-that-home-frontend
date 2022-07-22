@@ -6,7 +6,6 @@ import { useAuth } from "./contexts/auth-context";
 import CreatePropertyPage from "./pages/create-property";
 import EditProperty from "./pages/edit-property";
 import { PropertyProvider } from "./contexts/properties-context";
-
 import LandingPage from "./pages/landing-page";
 import ListProperties from "./pages/list-properties-page";
 import LoginPage from "./pages/login-page";
@@ -37,21 +36,21 @@ const App = () => {
     <MainWrapper>
       <PropertyProvider>
         <Navbar isAuth={isAuth} setIsAuth={setIsAuth} role={"seller"} />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="join" element={<SignUpPage />}>
-              <Route path=":landlord" element={<SignUpPage />} />
-              <Route path=":seeker" element={<SignUpPage />} />
-            </Route>
-            <Route path="properties" element={<ListProperties />} />
-            <Route path="profile" element={<div>Profile</div>} />
-            <Route path="property" >
-              <Route  path="show" element={ <ShowProperty/>  }/>
-              <Route  path="edit" element={ <EditProperty/>  }/>
-              <Route  path="create" element={ <CreatePropertyPage/>  }/>
-            </Route>
-          </Routes>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="join" element={<SignUpPage />}>
+            <Route path=":landlord" element={<SignUpPage />} />
+            <Route path=":seeker" element={<SignUpPage />} />
+          </Route>
+          <Route path="properties" element={<ListProperties />} />
+          <Route path="profile" element={<div>Profile</div>} />
+          <Route path="property">
+            <Route path="show" element={<ShowProperty />} />
+            <Route path="edit" element={<EditProperty />} />
+            <Route path="create" element={<CreatePropertyPage />} />
+          </Route>
+        </Routes>
       </PropertyProvider>
     </MainWrapper>
   );
