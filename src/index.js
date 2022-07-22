@@ -5,6 +5,7 @@ import { Global } from "@emotion/react";
 import { global, reset } from "./style/global";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./contexts/auth-context";
+import { IndividualPropertyProvider } from "./contexts/individual-property-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <Global styles={reset} />
     <Router>
       <AuthProvider>
-        <App />
+        <IndividualPropertyProvider>
+          <App />
+        </IndividualPropertyProvider>
       </AuthProvider>
     </Router>
   </>

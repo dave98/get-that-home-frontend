@@ -12,8 +12,8 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUser().then(setUser).catch(setError);
-  }, []);
+    user !== null && getUser().then(setUser).catch(setError);
+  }, [user]);
 
   const login = async (credentials) => {
     const user = await auth.login(credentials).catch(setError);

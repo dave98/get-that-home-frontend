@@ -69,6 +69,10 @@ export const typography = {
     font-size: 10px;
     line-height: 12px;
     `,
+    captionFooter: `
+    font-size: 12px;
+    line-height: 14px;
+    `
   },
   weight: {
     300: `

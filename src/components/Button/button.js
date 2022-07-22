@@ -9,6 +9,7 @@ const Button = ({
   size,
   margin,
   onClick,
+  type = "button",
   ...others
 }) => {
   return (
@@ -22,6 +23,7 @@ const Button = ({
         size={size}
         margin={margin}
         onClick={onClick}
+        type={type}
         {...others}
       >
         {lefticon && lefticon}

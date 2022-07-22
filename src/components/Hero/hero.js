@@ -11,14 +11,24 @@ import {
   InputHero,
   InputHeroContainer,
   InputLabelHero,
+  SugestionsItem,
+  SugestionsWrapper,
 } from "./style";
 import { useState } from "react";
+import { useProperties } from "../../contexts/properties-context";
 
 const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
   const [address, setAddress] = useState("");
+  const { filteredProperties } = useProperties();
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const data = {
+      address: address,
+      propertyType: e.target.property_type.value,
+      transactionType: e.target.transaction_type.value,
+    };
+    filteredProperties(data);
   };
 
   const imgPath = "/hero-cover.svg";
@@ -37,16 +47,20 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
           >
             The easiest way to find where you belong
           </Heading>
-          <HeroSearchBar initial={{ scale: 0 }} animate={{ scale: 1 }}>
+          <HeroSearchBar
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            onSubmit={handleSubmit}
+          >
             <CustomSelect
               label={"I'M LOOKING FOR"}
               name={"property_type"}
-              options={["Apartments", "Houses", "Offices"]}
+              options={["aparment", "house", "Office"]}
             />
             <CustomSelect
               label={"I WANT TO"}
-              name={"property_type"}
-              options={["Rent", "Buy", "Sell"]}
+              name={"transaction_type"}
+              options={["rent", "sell"]}
             />
             <PlacesAutocomplete
               value={address}
@@ -66,27 +80,23 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
                       placeholder: "Please enter the place you want to live",
                     })}
                   />
-                  <div>
+                  <SugestionsWrapper>
                     {loading && <div>Loading...</div>}
-                    {suggestions.map((suggestion) => {
-                      const style = {
-                        backgroundColor: "#f5f5f5",
-                        padding: "0.5rem",
-                        borderRadius: "0.25rem",
-                        margin: "0.5rem",
-                        cursor: "pointer",
-                      };
+                    {suggestions.map((suggestion, i) => {
                       return (
-                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                        <SugestionsItem
+                          key={`${i}-itemID`}
+                          {...getSuggestionItemProps(suggestion)}
+                        >
                           {suggestion.description}
-                        </div>
+                        </SugestionsItem>
                       );
                     })}
-                  </div>
+                  </SugestionsWrapper>
                 </InputHeroContainer>
               )}
             </PlacesAutocomplete>
-            <Button onClick={handleClick}>SEARCH</Button>
+            <Button>SEARCH</Button>
           </HeroSearchBar>
         </HeroContainer>
       </HeroWrapper>
@@ -97,5 +107,5 @@ const Hero = ({ isScriptLoaded, isScriptLoadSucceed }) => {
 };
 
 export default scriptLoader([
-  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GTH_MAP_API}&libraries=places`,
+  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_JS_MAPS_API}&libraries=places`,
 ])(Hero);
