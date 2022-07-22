@@ -169,6 +169,7 @@ export const FriendlyImage = styled.img({
 export const MyPropertiesTabsContainer = styled.div({
   display: "flex",
   flexDirection: "row",
+  alignItems: "flex-end",
   gap: 24,
   width: "100%",
   padding: "20px 0",
@@ -189,4 +190,47 @@ export const MyPropertiesTabText = styled.p({
   textTransform: "uppercase",
   letterSpacing: 1.25,
   color: "inherit",
+})
+
+// MyProfileStyles
+export const ProfileContainer = styled.div({
+  marginTop: "10%",
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 50,
+})
+
+export const ProfileImageContainer = styled(motion.div)({
+  height: 400,
+  width: 400,
+  display: "flex",
+  justifyContent: "center",
+  backgroundColor: "gray",
+  borderRadius: "50%"
+})
+
+export const ProfileImage = styled.img({
+  objectFit: "cover"
+})
+
+export const ProfileDescriptionContainer = styled(motion.div)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 10,
+})
+
+export const ProfileName = styled.h2({
+  fontSize: 35,
+  fontFamily: fonts.primary,
+  letterSpacing: 3,
+})
+
+export const ProfileDescription = styled.p({
+  fontSize: 20,
+  fontFamily: fonts.secondary,
+  letterSpacing: 1
 })

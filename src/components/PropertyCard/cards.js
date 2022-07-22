@@ -27,6 +27,7 @@ const PropertyCard = ({
   pets,
   owned,
   cover,
+  index,
   closed = false,
   onShow = () => {},
   onEdit = () => {},
@@ -36,10 +37,11 @@ const PropertyCard = ({
 }) => {
   return (
     <Container
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{scale: owned ? 1 : 1.1 }}
+      initial={{ y: 20, opacity: index ? 0 : 1}}
+      animate={{ y: 0, opacity: 1}}
+      transition={{delay: index ? (index * 0.25) : 0}}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{scale: owned ? 1 : 1.05 }}
     >
       <div onClick={onShow}>
         <CardImg cover={cover}>

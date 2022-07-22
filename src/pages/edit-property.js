@@ -16,7 +16,11 @@ export default function EditProperty(){
                 ? 
                     <EditPropertyWrapper>
                         <CreatePropertyForm/>
-                        <FriendlyImageContainer initial={{scale: 0}} animate={{scale: 1}}>
+                        <FriendlyImageContainer 
+                            initial={{ x: 30, opacity: 0 }} 
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{delay: 0.3}}
+                        >
                             <FriendlyImage src="/build-your-home-rafiki.svg"/>
                         </FriendlyImageContainer>
                     </EditPropertyWrapper>

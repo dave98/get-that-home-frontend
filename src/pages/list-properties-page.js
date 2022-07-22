@@ -44,7 +44,6 @@ const ListProperties = () => {
   }, [currentPage]);
 
   useEffect(() => {
-    console.log("Flag")
     getFilteredProperties(filters)
       .then(setCurrentProperties)
       .catch(console.log);
@@ -161,7 +160,7 @@ const ListProperties = () => {
         {currentProperties.length} Properties found
       </Heading>
       <PropertyList>
-        {properties.map((property) => (
+        {properties.map((property, index) => (
           <PropertyCard
             key={property.id}
             transactionType={property.operationType}
@@ -172,6 +171,7 @@ const ListProperties = () => {
             sqmeters={property.area}
             address={property.address}
             cover={property.base_image_url}
+            index={index}
             onShow={() => { showProperty(property.id) }}
           />
         ))}

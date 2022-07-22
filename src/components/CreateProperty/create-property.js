@@ -57,10 +57,6 @@ export default function CreatePropertyForm(){
 
     const [imagesPreview, setImagesPreview] = useState([]);
 
-    useEffect(() => {
-        console.log(selected)
-    }, [])
-
     function validate(values){
         const errors = {};
         console.log(values);
@@ -138,8 +134,8 @@ export default function CreatePropertyForm(){
         {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isValid, setFieldValue}) =>  (
                     <CreatePropertyFormContainer
                         onSubmit={handleSubmit}
-                        initial={{scale: 0}}
-                        animate={{scale: 1}}
+                        initial={{x: -30, opacity: 0}}
+                        animate={{x: 0, opacity: 1}}
                     >
                         {
                             currentOperation == "create"

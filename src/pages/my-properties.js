@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 import PropertyCard from "../components/PropertyCard";
 import { Heading } from "../components/typography";
 import { useAuth } from "../contexts/auth-context";
@@ -36,6 +37,10 @@ export default function MyProperties(){
         setTabFilter(newState)
     }
 
+    function handleCreatePropertyButton(){
+        navigate("/property/create");
+    }
+
     return (
         <ListPropertiesWrapper>
             <MyPropertiesTabsContainer>
@@ -56,6 +61,12 @@ export default function MyProperties(){
                 >
                     <MyPropertiesTabText>CLOSED</MyPropertiesTabText>
                 </MyPropertiesTab>
+                
+                <Button
+                    onClick={() => {handleCreatePropertyButton()}}
+                >
+                    +
+                </Button>
 
             </MyPropertiesTabsContainer>
             <Heading weight={500} size="xs">
@@ -63,7 +74,7 @@ export default function MyProperties(){
             </Heading>
             <PropertyList>
                 {   filteredData.length 
-                        ? filteredData.map((property) => {
+                        ? filteredData.map((property, index) => {
                             return (
                                 <PropertyCard
                                     key={property.id}
@@ -75,6 +86,7 @@ export default function MyProperties(){
                                     sqmeters={property.area}
                                     address={property.address}
                                     cover={property.base_image_url}
+                                    index={index}
                                     owned
                                     closed={ tabFilter === "active" ? false : true }
                                     onShow={() => { showProperty(property.id) }}

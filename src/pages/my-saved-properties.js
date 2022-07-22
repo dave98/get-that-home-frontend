@@ -61,7 +61,7 @@ export default function MySavedProperties(){
             <PropertyList>
                 {
                     filteredData.length
-                    ? filteredData.map((property) => {
+                    ? filteredData.map((property, index) => {
                         return (
                             <PropertyCard
                                 key={property.id}
@@ -73,6 +73,7 @@ export default function MySavedProperties(){
                                 sqmeters={property.area}
                                 address={property.address}
                                 cover={property.base_image_url}
+                                index={index}
                             />
                         )
                     })

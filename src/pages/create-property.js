@@ -13,7 +13,11 @@ export default function CreatePropertyPage(){
     return(
         <EditPropertyWrapper>
             <CreatePropertyForm/>
-            <FriendlyImageContainer  initial={{ scale: 0 }} animate={{ scale: 1 }}>
+            <FriendlyImageContainer  
+                initial={{ x: 30, opacity: 0 }} 
+                animate={{ x: 0, opacity: 1 }}
+                transition={{delay: 0.3}}
+            >
                 <FriendlyImage src="/select-house-rafiki.svg"/>
             </FriendlyImageContainer>
         </EditPropertyWrapper>
