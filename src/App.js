@@ -6,7 +6,6 @@ import { useAuth } from "./contexts/auth-context";
 import CreatePropertyPage from "./pages/create-property";
 import EditProperty from "./pages/edit-property";
 import { PropertyProvider } from "./contexts/properties-context";
-
 import LandingPage from "./pages/landing-page";
 import ListProperties from "./pages/list-properties-page";
 import LoginPage from "./pages/login-page";
@@ -15,6 +14,7 @@ import SignUpPage from "./pages/signup-page";
 import { IndividualPropertyProvider } from "./contexts/individual-property-context";
 import MyProperties from "./pages/my-properties";
 import MySavedProperties from "./pages/my-saved-properties";
+// import ShowProperty from "./pages/show-property-page";
 
 const MainWrapper = styled.div`
   display: flex;

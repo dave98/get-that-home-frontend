@@ -56,6 +56,19 @@ export const SignUpPageWrapper = styled.div`
   margin-top: 72px;
 `;
 
+export const ShowPropertyWrapper = styled.div`
+  margin-top: 104px;
+  padding: 0 15%;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 16px;
+`;
+export const ShowPropertyContainer = styled.div`
+  width: 830px;
+  height: 1606px;
+  background-color: ${colors.white};
+`;
+
 // ListPropertiesPage
 
 export const ListPropertiesWrapper = styled.div`
