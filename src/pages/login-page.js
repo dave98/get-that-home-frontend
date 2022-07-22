@@ -1,6 +1,11 @@
 import Button from "../components/Button/button";
 import Input from "../components/Input";
-import { LoginPageWrapper, LoginForm, LoginTitle } from "./pages-styles";
+import {
+  LoginPageWrapper,
+  LoginForm,
+  LoginTitle,
+  ErrorMessageGlobal,
+} from "./pages-styles";
 import { RiUserReceived2Fill } from "react-icons/ri";
 import { validate, initialLogin } from "./utils";
 import { Formik } from "formik";
@@ -65,6 +70,7 @@ const LoginPage = () => {
             >
               LOGIN
             </Button>
+            {/* {error && <ErrorMessageGlobal>{error.message === "Access denied" ? 'Invalid Email or Password' : error.message}</ErrorMessageGlobal>} */}
           </LoginForm>
         )}
       </Formik>
