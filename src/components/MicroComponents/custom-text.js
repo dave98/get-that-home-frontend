@@ -1,10 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { TextInputContainer, TextInputFooter, TextInputMainContainer, TextInputMainLabel, TextInputText } from "./styles";
 
 export default function CustomText({name, label, value, onChange, placeholder, error, footer, isTouched,  onBlur, ...props}){
     const textAreaRef = useRef(null);
-    const [currentValue, setCurrentValue] = useState(value)
-
 
     useEffect(() => {
         if(textAreaRef.current){

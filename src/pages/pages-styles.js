@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { colors, typography } from "../style";
+import { fonts } from "../style/typography";
 
 // LoginPage
 export const LoginPageWrapper = styled.div`
@@ -55,18 +56,18 @@ export const SignUpPageWrapper = styled.div`
   margin-top: 72px;
 `;
 
-export const ShowPropertyWrapper = styled.div`
-  margin-top: 104px;
-  padding: 0 15%;
-  margin-bottom: 2rem;
-  display: flex;
-  gap: 16px;
-`;
-export const ShowPropertyContainer = styled.div`
-  width: 830px;
-  height: 1606px;
-  background-color: ${colors.white};
-`;
+export const ShowPropertyWrapper = styled(motion.div)({
+  margin: "104px 0 32px 0",
+  padding: "0 15%",
+  display: "flex",
+  gap: 16,
+})
+
+export const ShowPropertyContainer = styled.div({
+  width: 830,
+  height: 1606,
+  backgroundColor: colors.white,
+})
 
 // ListPropertiesPage
 
@@ -101,17 +102,19 @@ export const ButtonsContainer = styled.div`
   gap: 0.5rem;
 `;
 
-export const PropertyList = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  gap: 2rem 5rem;
-`;
+export const PropertyList = styled.div( 
+  ({justify = "center"}) =>  ({
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: justify,
+    alignItems: "center",
+    width: "100%",
+    margin: "1rem 0 1rem 0",
+    gap: "2rem 5rem"
+  })
+)
+
 
 export const EditPropertyWrapper = styled.div({
   height: "89vh",
@@ -141,6 +144,21 @@ export const FriendlyImageContainer = styled(motion.div)({
   },
 });
 
+export const LostImageContainer = styled(motion.div)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "auto",
+  marginTop: "5%",
+}, ({height}) => ({
+  height: height ? height : 800,
+}))
+
+export const LostImageHelperText = styled.p({
+  fontSize: 25,
+})
+
 export const FriendlyImage = styled.img({
   height: "100%",
   width: "auto",
@@ -155,3 +173,73 @@ export const FindHomeInputContainer = styled.div`
   height: fit-content;
   position: relative;
 `;
+
+// MyPropertiesStyles
+export const MyPropertiesTabsContainer = styled.div({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "flex-end",
+  gap: 24,
+  width: "100%",
+  padding: "20px 0",
+})
+
+export const MyPropertiesTab = styled(motion.div)({
+  paddingBottom: 6,
+  color: "gray",
+  cursor: "pointer",
+}, ({active}) => ({
+  borderBottom: active ? "2px solid red" : "none",
+  color: active ? "black" : "gray",
+}))
+
+export const MyPropertiesTabText = styled.p({
+  fontSize: 18,
+  fontFamily: fonts.primary,
+  textTransform: "uppercase",
+  letterSpacing: 1.25,
+  color: "inherit",
+})
+
+// MyProfileStyles
+export const ProfileContainer = styled.div({
+  marginTop: "10%",
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 50,
+})
+
+export const ProfileImageContainer = styled(motion.div)({
+  height: 400,
+  width: 400,
+  display: "flex",
+  justifyContent: "center",
+  backgroundColor: "gray",
+  borderRadius: "50%"
+})
+
+export const ProfileImage = styled.img({
+  objectFit: "cover"
+})
+
+export const ProfileDescriptionContainer = styled(motion.div)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 10,
+})
+
+export const ProfileName = styled.h2({
+  fontSize: 35,
+  fontFamily: fonts.primary,
+  letterSpacing: 3,
+})
+
+export const ProfileDescription = styled.p({
+  fontSize: 20,
+  fontFamily: fonts.secondary,
+  letterSpacing: 1
+})

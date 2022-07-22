@@ -13,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { useEffect } from "react";
+import ButtonIcon from "../ButtonIcon/buttonIcon";
 
 const icons = {
   login: <RiUserReceivedFill size={18} />,
@@ -24,9 +25,9 @@ const icons = {
   profile: <RiUserFill size={18} />,
 };
 
-const Navbar = ({ role, isAuth, setIsAuth }) => {
+const Navbar = ({ isAuth, setIsAuth }) => {
   const navigate = useNavigate();
-  const { logout, error, user } = useAuth();
+  const { logout, error, user, role, setRole } = useAuth();
 
   useEffect(() => {
     if (!user) {
@@ -54,6 +55,7 @@ const Navbar = ({ role, isAuth, setIsAuth }) => {
         >
           FIND A HOME
         </Button>
+        
         <Button
           buttontype={"line"}
           lefticon={isAuth ? icons.logout : icons.join}
@@ -69,11 +71,30 @@ const Navbar = ({ role, isAuth, setIsAuth }) => {
         >
           {isAuth ? "LOGOUT" : "JOIN"}
         </Button>
+
         {isAuth ? (
-          role === "seller" ? (
-            <Button lefticon={icons.heart}>SAVED PROPERTIES</Button>
-          ) : (
-            <Button lefticon={icons.home}>MY PROPERTIES</Button>
+          role === "seeker" ? (
+            <Button 
+              lefticon={icons.heart}
+              onClick={(event) => {
+                event.preventDefault();
+                navigate("/my-saved-properties") 
+              }}
+              animationOnAppear={true}
+            >
+              SAVED PROPERTIES
+            </Button>
+          ) : ( // landlordCase
+            <Button 
+              lefticon={icons.home}
+              onClick={(event) => {
+                event.preventDefault();
+                navigate("/my-properties");
+              }}
+              animationOnAppear={true}
+            >
+              MY PROPERTIES
+            </Button>
           )
         ) : (
           ""
@@ -86,14 +107,25 @@ const Navbar = ({ role, isAuth, setIsAuth }) => {
         >
           {isAuth ? "PROFILE" : "LOGIN"}
         </Button>
+        {
+          isAuth 
+          ? <ButtonIcon 
+            radius={60} 
+            image={role === "seeker" ? "/house-searching-cuate.svg" : "/for-sale-cuate.svg"}
+            rotate
+            onClick={() => {
+              setRole( role === "seeker" ? "landlord" : "seeker")
+            }}
+          >
+            {role.toUpperCase()}
+          </ButtonIcon>
+          : null
+        }
+        
+
       </ButtonsContainer>
     </NavbarContainer>
   );
 };
 
 export default Navbar;
-
-Navbar.propTypes = {
-  isAuth: PropTypes.bool.isRequired,
-  role: PropTypes.oneOf(["landlord", "seller"]),
-};

@@ -17,11 +17,13 @@ import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import PaginationButtons from "../components/MicroComponents/pagination-buttons";
 import { useProperties } from "../contexts/properties-context";
+import { useIndividualProperty } from "../contexts/individual-property-context";
 import FilterModal from "../components/FiltersModal/filters-modal";
 import { getFilteredProperties } from "../services/properties-service";
 import { SugestionsItem, SugestionsWrapper } from "../components/Hero/style";
 
 const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
+  const { showProperty } = useIndividualProperty();
   const { currentProperties, setCurrentProperties } = useProperties();
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 9;
@@ -205,6 +207,8 @@ const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
               sqmeters={property.area}
               address={property.address}
               cover={property.base_image_url}
+              index={index}
+              onShow={() => { showProperty(property.id) }}
             />
           ))}
         </PropertyList>

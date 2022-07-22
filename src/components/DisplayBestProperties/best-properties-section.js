@@ -1,3 +1,4 @@
+import { useIndividualProperty } from "../../contexts/individual-property-context";
 import { useProperties } from "../../contexts/properties-context";
 import { colors } from "../../style";
 import PropertyCard from "../PropertyCard/cards";
@@ -6,6 +7,7 @@ import { BestPropertiesContainer, BestPropertiesWrapper } from "./style";
 
 const BestPropertiesSection = () => {
   const { currentProperties } = useProperties();
+  const {showProperty} = useIndividualProperty();
 
   const bestProperties = () => {
     const filteredProperties = currentProperties
@@ -24,7 +26,7 @@ const BestPropertiesSection = () => {
           Homes for rent at the best prices
         </Heading>
         <BestPropertiesContainer>
-          {bestProperties().map((property) => (
+          {bestProperties().map((property, index) => (
             <PropertyCard
               key={property.id}
               price={property.rentAmount}
@@ -35,6 +37,8 @@ const BestPropertiesSection = () => {
               sqmeters={property.area}
               pets={property.pets}
               cover={property.base_image_url}
+              index={index}
+              onShow={() => { showProperty(property.id)} }
             />
           ))}
         </BestPropertiesContainer>

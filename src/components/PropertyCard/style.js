@@ -77,14 +77,31 @@ export const CardInmueble = styled.div`
   gap: 0.3rem;
 `;
 
-export const CardAddress = styled.p`
-  ${fonts.secondary}
-  ${typography.body.sm}
-  ${typography.weight[400]}
-  color: ${colors.grays.dark};
-  text-align: left;
-  padding: 0 0.5rem;
-`;
+export const CardAddress = styled.p({
+  fontFamily: fonts.secondary,
+  fontSize: 16,
+  lineHeight: "24px",
+  fontWeight: 400,
+  color: colors.grays.dark,
+  textAlign: "left",
+  padding: "0 0.5rem",
+  height: 72,
+  maxHeight: 72,
+  overflowY: "scroll",
+  "::-webkit-scrollbar": {
+    width: "5px",    
+  },
+  "::-webkit-scrollbar-track": {
+    background: "#f1f1f1",
+  },
+  "::-webkit-scrollbar-thumb": {
+    background: "#888",
+  },
+  "::webkit-scrollbar-thumb:hover": {
+    background: "#555",
+  }
+})
+
 
 export const CardFooterInfo = styled.div`
   display: flex;
@@ -94,20 +111,18 @@ export const CardFooterInfo = styled.div`
   color: ${colors.grays.dark};
   gap: 1.5rem;
   padding: 0 0.5rem;
-  margin-top: 1.7rem;
+  margin-top: 0.4rem;
 `;
-export const FooterInfo = styled.div`
+
+export const FooterInfo = styled(motion.div)`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  padding: 4px;
   gap: 4px;
 `;
 
 export const CardFooter = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   display: flex;
   flex-direction: column;
   height: fit-content;
@@ -115,14 +130,14 @@ export const CardFooter = styled.div`
 
 export const MutableBottom = styled.div`
   display: flex;
+  justify-content: space-around;
   min-height: 7px;
   background-color: ${colors.blues.dark};
   border-radius: 0 0 8px 8px;
   width: 100%;
   height: fit-content;
-  margin-top: 10px;
   color: ${colors.white};
-  gap: 50px;
   ${({ owned }) => (owned ? `padding: 12px` : `padding: 0`)}
   justify-content: center;
 `;
+
