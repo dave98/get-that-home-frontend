@@ -21,13 +21,19 @@ export default function CustomRadio({
   isTouched,
   isValid,
   onBlur,
+  initial,
+  variants,
   ...props
 }) {
   const globalName = name.toLocaleLowerCase().replace(/ /g, "_");
 
   return (
     <ErrorContainer errorDirection={errorDirection}>
-      <RadioInputMainContainer>
+      <RadioInputMainContainer
+        initial={initial ?  initial : null}
+        variants={variants ? variants : null}
+        animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+      >
         {mainLabel && <RadioInputMainLabel>{mainLabel}</RadioInputMainLabel>}
         <RadioInputContainer direction={direction}>
           {labels.map((l, index) => {

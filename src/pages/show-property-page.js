@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import PropertyImageSlice from "../components/PropertyImageSlice/index";
 import PropertyLocation from "../components/PropertyLocation/index";
 import PropertyMutableComponent from "../components/PropertyMutableComponent/index";
@@ -14,8 +14,16 @@ import {
 
 export default function ShowProperty() {
   const { selected } = useIndividualProperty();
-  const location = selected.address.split` `;
-  const country = location[location.length - 1];
+  const [location, setLocation] = useState(null);
+  const [country, setCountry] = useState(null);
+  
+  useEffect(() => {
+    if(selected){
+      let tLocation = selected.address.split` `;
+      setLocation(tLocation);
+      setCountry(tLocation[tLocation.length -1])
+    }
+  }, [selected])
 
   return (
     <Fragment>

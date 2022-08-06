@@ -11,6 +11,7 @@ const Button = ({
   onClick,
   type = "button",
   animationOnAppear = false,
+  width="auto",
   ...others
 }) => {
   return (
@@ -27,6 +28,7 @@ const Button = ({
         margin={margin}
         onClick={onClick}
         type={type}
+        width={width}
         {...others}
       >
         {lefticon && lefticon}

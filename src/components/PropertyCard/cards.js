@@ -40,7 +40,7 @@ const PropertyCard = ({
     active: {
       y: 0,
       opacity: 1,
-      transition: { delay: index ? (index*0.15) : 0}
+      transition: { delay: index ? (index*0.20) : 0}
     },
     hovering: {
       scale:  owned ? 1.02 : 1.03,
@@ -85,7 +85,6 @@ const PropertyCard = ({
         <CardAddress>{address || "this is a test address"}</CardAddress>
       </div>
       <CardFooter>
-        
         <CardFooterInfo>
           <FooterInfo>
             <BiBed size={20} />
@@ -101,7 +100,6 @@ const PropertyCard = ({
           </FooterInfo>
           {pets ? <MdPets size={24} /> : null}
         </CardFooterInfo>
-
         <MutableBottom>
           {owned ? !closed ? (
             <>
@@ -127,8 +125,8 @@ const PropertyCard = ({
             </>
           : null}
         </MutableBottom>
-
       </CardFooter>
+
     </Container>
   );
 };

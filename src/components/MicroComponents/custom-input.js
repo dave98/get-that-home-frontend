@@ -20,15 +20,24 @@ export const CustomInput = ({
   isTouched,
   isValid,
   onBlur,
+  width = 300,
+  initial,
+  variants,
   ...props
 }) => {
   const globalName = label.toLocaleLowerCase().replace(/ /g, "_");
 
   return (
     <ErrorContainer errorDirection={errorDirection}>
-      <SurrounderInputContainer type={type} errorDirection={errorDirection}>
+      <SurrounderInputContainer 
+        type={type} 
+        errorDirection={errorDirection}
+        initial={initial ? initial : null}
+        variants={variants ? variants : null}
+        animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+      >
         {label && <CustomInputLabel>{label}</CustomInputLabel>}
-        <CustomInputContainer>
+        <CustomInputContainer width={width}>
           {icon && icon}
           <CustomInputBox
             type={type}

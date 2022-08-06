@@ -1,6 +1,6 @@
 import Button from "../Button";
 import { Text } from "../typography"
-import { MutableComponentContainer, MutableComponentWarrper, OwnerInformationContainer, OwnerInformationImage, OwnerInformationImageContainer, OwnerInformationText } from "./style";
+import { FakeComponentWarrper, MutableComponentContainer, MutableComponentWarrper, OwnerInformationContainer, OwnerInformationImage, OwnerInformationImageContainer, OwnerInformationText, OwnerInformationTextContainer } from "./style";
 import { RiDislikeFill, RiDislikeLine, RiHeart3Fill, RiHeart3Line, RiUserReceived2Fill } from "react-icons/ri";
 import { useAuth } from "../../contexts/auth-context";
 import { Fragment, useEffect, useState } from "react";
@@ -63,76 +63,81 @@ const PropertyMutableComponent = ({propertyId}) => {
 
   // 🚬🚬
   return (
-    <MutableComponentWarrper>
-      <MutableComponentContainer>
-        {
-          user
-          ? isMyProperty 
-          ?
-          <Fragment>
-            <Button
-             onClick={() => {showToUpdateProperty(propertyId)}} 
-            >
-              EDIT PROPERTY
-            </Button>
-          </Fragment>
-          :
-          <Fragment>
-            {
-              isInMyContacts 
-              ?
-                ownerInformation 
-                ? 
-                  <OwnerInformationContainer>
-                    <OwnerInformationImageContainer>
-                      <OwnerInformationImage 
-                        src={ownerInformation.avatar_url ? ownerInformation.avatar_url : "/avatar-1.svg"} 
-                      />
-                    </OwnerInformationImageContainer>
+    <Fragment>
+      <FakeComponentWarrper/>
+      <MutableComponentWarrper>
+        <MutableComponentContainer>
+          {
+            user
+            ? isMyProperty 
+            ?
+            <Fragment>
+              <Button
+              onClick={() => {showToUpdateProperty(propertyId)}} 
+              >
+                EDIT PROPERTY
+              </Button>
+            </Fragment>
+            :
+            <Fragment>
+              {
+                isInMyContacts 
+                ?
+                  ownerInformation 
+                  ? 
+                    <OwnerInformationContainer>
+                      <OwnerInformationImageContainer>
+                        <OwnerInformationImage 
+                          src={ownerInformation.avatar_url ? ownerInformation.avatar_url : "/avatar-1.svg"} 
+                        />
+                      </OwnerInformationImageContainer>
 
-                      <OwnerInformationText size={20}>
-                        {ownerInformation.name}
-                      </OwnerInformationText>
-                      <OwnerInformationText>
-                          {ownerInformation.email}
-                      </OwnerInformationText>
-                      <OwnerInformationText>
-                          {ownerInformation.phone}
-                      </OwnerInformationText>
-      
-                  </OwnerInformationContainer>
+                      <OwnerInformationTextContainer>
+                        <OwnerInformationText size={20}>
+                          {ownerInformation.name}
+                        </OwnerInformationText>
+                        <OwnerInformationText>
+                            {ownerInformation.email}
+                        </OwnerInformationText>
+                        <OwnerInformationText>
+                            {ownerInformation.phone}
+                        </OwnerInformationText>
+                      </OwnerInformationTextContainer>
+        
+                    </OwnerInformationContainer>
+                  :
+                    <Text>Obtaining owner information</Text>
                 :
-                  <Text>Obtaining owner information</Text>
-              :
-                <Button
-                  onClick={() => {handleContact()}}
-                >
-                  CONTACT ADVERTISER
-                </Button>
-            } 
+                  <Button
+                    onClick={() => {handleContact()}}
+                  >
+                    CONTACT ADVERTISER
+                  </Button>
+              } 
 
-            <ButtonIcon
-              icon={ isInMyFavorites ? <RiHeart3Fill size={35} color={"#c90c0c"}/> : <RiHeart3Line size={30} color={"#0c1f8a"}/> }
-              onClick={() => {isInMyFavorites ? handleRemoveLike() : handleLike()}}
-              duration={0.5}
-              rotate
-            >
-                {isInMyFavorites ? "LIKED" : "LIKE"}
-            </ButtonIcon>
-          </Fragment>
-          :
-          <Fragment>
-            <Text>Log in or Join to contact the advertiser</Text>
-            <Button
-              onClick={() => {navigate("/login")}} 
-            >
-              <RiUserReceived2Fill/>
-              Login
-            </Button>
-          </Fragment>
-        }
-      </MutableComponentContainer>
-    </MutableComponentWarrper>
+              <ButtonIcon
+                icon={ isInMyFavorites ? <RiHeart3Fill size={20} color={"#c90c0c"}/> : <RiHeart3Line size={40} color={"#0c1f8a"}/> }
+                onClick={() => {isInMyFavorites ? handleRemoveLike() : handleLike()}}
+                duration={0.5}
+                rotate
+              >
+                  {isInMyFavorites ? "LIKED" : "LIKE"}
+              </ButtonIcon>
+            </Fragment>
+            :
+            <Fragment>
+              <Text>Log in or Join to contact the advertiser</Text>
+              <Button
+                onClick={() => {navigate("/login")}} 
+              >
+                <RiUserReceived2Fill/>
+                Login
+              </Button>
+            </Fragment>
+          }
+        </MutableComponentContainer>
+      </MutableComponentWarrper>
+    </Fragment>
   )
 }
 

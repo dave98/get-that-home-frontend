@@ -38,7 +38,6 @@ export const LoginTitle = styled.h1`
 `;
 
 // SignUpPage
-
 export const SignUpPageWrapper = styled.div`
   height: 89vh;
   background: linear-gradient(
@@ -57,50 +56,128 @@ export const SignUpPageWrapper = styled.div`
 `;
 
 export const ShowPropertyWrapper = styled(motion.div)({
-  margin: "104px 0 32px 0",
-  padding: "0 15%",
+  margin: "104px 4% 32px 4%",
   display: "flex",
-  gap: 16,
+  justifyContent: "center",
+  "@media(max-width: 1270px)": {
+    marginBottom: 200,
+  }
 });
 
 export const ShowPropertyContainer = styled.div({
-  width: 830,
-  height: 1606,
+  //maxWidth: 830,
+  //height: 1606,
   backgroundColor: colors.white,
 });
 
 // ListPropertiesPage
+export const ListPropertiesWrapper = styled.div({
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  paddingTop: 72,
+  width: "100vw",
+  paddingLeft: "8%",
+  paddingRight: "8%",
+  "@media(max-width: 1270px)": {
+    paddingTop: 114,
+  }
+})
 
-export const ListPropertiesWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors.white};
-  padding-top: 72px;
-  height: fit-content;
-  width: 100vw;
-  padding-left: 10%;
-  padding-right: 10%;
-`;
+export const BackgroundImage = styled.div({
+  position: "fixed",
+  top: 0,
+  bottom: "-25vw",//-330,
+  left: 0,
+  right: 0,
+  backgroundImage: "url(/construction-cuate.svg)",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "bottom",
+  backgroundSize: "contain",
+  zIndex: -1,
+  opacity: 0.6,
+})
 
-export const FiltersHead = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-`;
+export const FiltersHead = styled.div({
+  position: "fixed",
+  top: 40, 
+  left: 0,
+  right: 0,
+  zIndex: 10,
+  backgroundColor: "#fff",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100%",
+  padding: "20px 8%",
+  marginBottom: "2rem",
+  marginTop: "2rem",
+  "@media(max-width: 1270px)": {
+    flexDirection: "column",
+    gap: "1rem 0"
+  }
+})
 
-export const ButtonsContainer = styled.div`
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-`;
+export const TopHead = styled.div({
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+  gap: "1rem",
+  zIndex: 1,
+  "@media(max-width: 540px)": {
+    flexDirection: "column",
+  }
+})
+
+export const TopCenter = styled.div({
+  position: "absolute",
+  left: 0, 
+  right: 0,
+  display: "flex",
+  justifyContent: "center",
+  transition: "all .3s linear",
+  "@media(max-width: 1270px)": {
+      position: "static",
+  },
+  "@media(max-width: 750px)": {
+    display: "flex",
+    position: "absolute",
+    bottom: -255,
+    opacity: 0.5,
+    padding: "10px 8%",
+    backgroundColor: colors.white,
+    clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+    "&.active": {
+      opacity: 1,
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+    },
+  }
+})
+
+export const TopCenterDisplayer = styled.div({
+  width: "100%",
+  display: "none",
+  "@media(max-width: 750px)": {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  }
+})
+
+export const ButtonsContainer = styled.div({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "0.5rem",
+  "@media(max-width: 750px)": {
+    padding: "10px 0",
+    width: "100%",
+    flexDirection: "column",
+    boxShadow: `0px 0px 10px ${colors.grays.dark}`
+  }
+})
 
 export const PropertyList = styled.div(({ justify = "center" }) => ({
   display: "flex",
@@ -109,8 +186,8 @@ export const PropertyList = styled.div(({ justify = "center" }) => ({
   justifyContent: justify,
   alignItems: "center",
   width: "100%",
-  margin: "1rem 0 1rem 0",
-  gap: "2rem 5rem",
+  margin: "4rem 0 5rem 0",
+  gap: "2rem 4%",
 }));
 
 export const EditPropertyWrapper = styled.div({
@@ -119,22 +196,28 @@ export const EditPropertyWrapper = styled.div({
   display: "flex",
   flexDirection: "row",
   alignItems: "flex-start",
-  width: "100vw",
+  width: "100%",
   overflowY: "scroll",
   scrollBehavior: "smooth",
-  padding: "3rem 50px 3rem 200px",
+  padding: "3rem 50px 3rem 9vw",
   marginTop: 72,
+  "@media(max-width: 1200px)": {
+    justifyContent: "center",
+  },
+  "@media(max-width: 750px)": {
+    padding: "3rem 1vw 3rem 1vw",
+  }
 });
 
 export const FriendlyImageContainer = styled(motion.div)({
-  position: "absolute",
-  right: "5%",
-  top: "5%",
-  height: 900,
-  width: "auto",
+  position: "fixed",
+  right: "5vw",
+  bottom: 0,
+  width: 900,
+  height: "auto",
   "@media(max-width: 1700px)": {
+    top: "5vh",
     height: 700,
-    top: "20%",
   },
   "@media(max-width: 1200px)": {
     display: "none",
@@ -147,32 +230,33 @@ export const LostImageContainer = styled(motion.div)(
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    width: "auto",
+    width: "100%",
     marginTop: "5%",
+    maxWidth: 900,
   },
   ({ height }) => ({
-    height: height ? height : 800,
+    height: height ? height : 900,
   })
 );
 
 export const LostImageHelperText = styled.p({
   fontSize: 25,
+  margin: "0 10%",
+  textAlign: "center",
 });
 
 export const FriendlyImage = styled.img({
-  height: "100%",
-  width: "auto",
+  width: "90vw",
+  height: "auto",
   objectFit: "cover",
   borderRadius: 8,
 });
 
-export const FindHomeInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  height: fit-content;
-  position: relative;
-`;
+export const FindHomeInputContainer = styled.div({
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+})
 
 // MyPropertiesStyles
 export const MyPropertiesTabsContainer = styled.div({

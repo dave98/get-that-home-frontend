@@ -4,13 +4,14 @@ import { colors } from "../../style/colors";
 import { fonts } from "../../style/typography";
 
 // Refactor to styles props in an object
-export const CustomizableButton = styled(motion.button)({
+export const CustomizableButton = styled(motion.button)(({width}) => ({
   display: "flex",
+  justifyContent: "center",
   gap: "0.5rem",
   alignItems: "center",
-  borderRadius: "3rem",
+  borderRadius: ".5rem",
   fontFamily: fonts.primary,
-  width: "fit-content",
+  width: width,
   outline: "none",
   cursor: "pointer",
   transition: "background-color 0.2 ease-in-out",
@@ -23,7 +24,7 @@ export const CustomizableButton = styled(motion.button)({
     cursor: "not-allowed",
     opacity: "0.6",
   }
-}, ({buttontype}) => (
+}), ({buttontype}) => (
   function(){
     if(buttontype === "line"){
       return {

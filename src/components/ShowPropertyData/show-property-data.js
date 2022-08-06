@@ -22,9 +22,7 @@ const ShowPropertyData = ({
 }) => {
   return (
     <ShowPropertyDataWapper>
-      
       <ShowAddressContainer>
-
         <ShowAddressContainer2>
           <CardTitle>{address}</CardTitle>
         </ShowAddressContainer2>

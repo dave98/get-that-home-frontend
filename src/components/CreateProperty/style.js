@@ -3,27 +3,34 @@ import styled from "styled-components";
 import { colors, typography } from "../../style";
 import { fonts } from "../../style/typography";
 
-export const CreatePropertyFormTitle = styled.h1`
-    ${typography.head.md};
-    ${typography.weight[400]};
-    color: ${colors.black};
-`
-export const CreatePropertyFormContainer = styled(motion.form)`
-    display: flex;
-    flex-direction: column;   
-    gap: 16px;
-    width: 600px;
-    z-index: 10;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
-    padding: 10px 20px;
-`
+export const CreatePropertyFormTitle = styled(motion.h1)({
+    fontSize: 36,
+    lineHeight: "48px",
+    fontWeight: 400, 
+    color: colors.black
+})
 
-export const CreatePropertyFormPropertyConfigContainer = styled.div({
+export const CreatePropertyFormContainer = styled(motion.form)({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    
+    gap: 16,
+    width: 600,
+    zIndex: 10,
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    padding: "10px 20px"
+})
+
+export const CreatePropertyFormPropertyConfigContainer = styled(motion.div)({
     display: "flex",
     flexDirection: "row",
+    width: "100%",
     gap: 16,
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    "@media(max-width: 750px)": {
+        flexDirection: "column",
+    }
 })
 
 export const CreatePropertyFormPetsHelperTextContainer = styled.div({
@@ -31,7 +38,7 @@ export const CreatePropertyFormPetsHelperTextContainer = styled.div({
     flexDirection: "column",
 })
 
-export const CreatePropertyFormHelperText = styled.p({
+export const CreatePropertyFormHelperText = styled(motion.p)({
     fontSize: 12,
     fontFamily: fonts.secondary,
     color: colors.grays.light,
@@ -44,13 +51,14 @@ export const CreatePropertyFormImageContainer = styled.div({
     gap: 8,
 })
 
-export const CreatePropertyFormImageTitle = styled.h3(`
-    ${typography.head.l}
-    ${typography.weight[400]}
-    color: ${colors.white};
-`)
+export const CreatePropertyFormImageTitle = styled(motion.h3)({
+    fontSize: 36,
+    lineHeight: "48px",
+    fontWeight: 400, 
+    color: colors.black
+})
 
-export const CreatePropertyFormImageInputContainer = styled.div({
+export const CreatePropertyFormImageInputContainer = styled(motion.div)({
     display: "flex",
     flexDirection: "column",
     gap: 4,
@@ -63,7 +71,7 @@ export const CreatePropertyFormImageInputTitle = styled.div({
     letterSpacing: 1.5,
 })
 
-export const CreatePropertyFormImageImagesContainer = styled.div({
+export const CreatePropertyFormImageImagesContainer = styled(motion.div)({
     padding: "8px 8px",
     display: "flex",
     flexDirection: "row",
