@@ -1,6 +1,6 @@
 import Button from "../Button/button";
 import PropTypes from "prop-types";
-import { Logo, NavbarContainer, ButtonsContainer } from "./style";
+import { Logo, NavbarContainer, ButtonsContainer, DisposableButtons } from "./style";
 import {
   RiUserAddFill,
   RiUserReceivedFill,
@@ -9,10 +9,12 @@ import {
   RiHeartFill,
   RiHome2Fill,
   RiUserFill,
+  RiOpenArmFill,
+  RiListCheck,
 } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ButtonIcon from "../ButtonIcon/buttonIcon";
 
 const icons = {
@@ -28,6 +30,8 @@ const icons = {
 const Navbar = ({ isAuth, setIsAuth }) => {
   const navigate = useNavigate();
   const { logout, error, user, role, setRole } = useAuth();
+  // Css functionality hooks
+  const [displayedButtons, setDisplayedButtons] = useState(false)
 
   useEffect(() => {
     if (!user) {
@@ -39,6 +43,11 @@ const Navbar = ({ isAuth, setIsAuth }) => {
     e.preventDefault();
     navigate(route);
   };
+
+  function handlingDisplayingButtons(){
+    setDisplayedButtons(!displayedButtons);
+  }
+
   return (
     <NavbarContainer>
       <Logo
@@ -56,73 +65,79 @@ const Navbar = ({ isAuth, setIsAuth }) => {
           FIND A HOME
         </Button>
         
-        <Button
-          buttontype={"line"}
-          lefticon={isAuth ? icons.logout : icons.join}
-          onClick={(e) => {
-            if (isAuth) {
-              logout();
-              handleClick(e, "/");
-              error && console.log(error);
-            } else {
-              handleClick(e, "/join");
-            }
-          }}
-        >
-          {isAuth ? "LOGOUT" : "JOIN"}
-        </Button>
-
-        {isAuth ? (
-          role === "seeker" ? (
-            <Button 
-              lefticon={icons.heart}
-              onClick={(event) => {
-                event.preventDefault();
-                navigate("/my-saved-properties") 
-              }}
-              animationOnAppear={true}
-            >
-              SAVED PROPERTIES
-            </Button>
-          ) : ( // landlordCase
-            <Button 
-              lefticon={icons.home}
-              onClick={(event) => {
-                event.preventDefault();
-                navigate("/my-properties");
-              }}
-              animationOnAppear={true}
-            >
-              MY PROPERTIES
-            </Button>
-          )
-        ) : (
-          ""
-        )}
-        <Button
-          lefticon={isAuth ? icons.profile : icons.login}
-          onClick={(e) => {
-            isAuth ? handleClick(e, "/profile") : handleClick(e, "/login");
-          }}
-        >
-          {isAuth ? "PROFILE" : "LOGIN"}
-        </Button>
-        {
-          isAuth 
-          ? <ButtonIcon 
-            radius={60} 
-            image={role === "seeker" ? "/house-searching-cuate.svg" : "/for-sale-cuate.svg"}
-            rotate
-            onClick={() => {
-              setRole( role === "seeker" ? "landlord" : "seeker")
+        <DisposableButtons className={displayedButtons ? "active" : null}>
+          <Button
+            buttontype={"line"}
+            lefticon={isAuth ? icons.logout : icons.join}
+            onClick={(e) => {
+              if (isAuth) {
+                logout();
+                handleClick(e, "/");
+                error && console.log(error);
+              } else {
+                handleClick(e, "/join");
+              }
             }}
           >
-            {role.toUpperCase()}
-          </ButtonIcon>
-          : null
-        }
-        
+            {isAuth ? "LOGOUT" : "JOIN"}
+          </Button>
 
+          {isAuth ? (
+            role === "seeker" ? (
+              <Button 
+                lefticon={icons.heart}
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigate("/my-saved-properties") 
+                }}
+                animationOnAppear={true}
+              >
+                SAVED PROPERTIES
+              </Button>
+            ) : ( // landlordCase
+              <Button 
+                lefticon={icons.home}
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigate("/my-properties");
+                }}
+                animationOnAppear={true}
+              >
+                MY PROPERTIES
+              </Button>
+            )
+          ) : (
+            ""
+          )}
+          <Button
+            lefticon={isAuth ? icons.profile : icons.login}
+            onClick={(e) => {
+              isAuth ? handleClick(e, "/profile") : handleClick(e, "/login");
+            }}
+          >
+            {isAuth ? "PROFILE" : "LOGIN"}
+          </Button>
+          {
+            isAuth 
+            ? <ButtonIcon 
+              radius={60} 
+              image={role === "seeker" ? "/house-searching-cuate.svg" : "/for-sale-cuate.svg"}
+              rotate
+              onClick={() => {
+                setRole( role === "seeker" ? "landlord" : "seeker")
+              }}
+            >
+              {role.toUpperCase()}
+            </ButtonIcon>
+            : null
+          }
+        </DisposableButtons>
+        
+        <Button
+          className="disposableButton"
+          lefticon={<RiListCheck/>}
+          onClick={handlingDisplayingButtons}
+        />
       </ButtonsContainer>
     </NavbarContainer>
   );

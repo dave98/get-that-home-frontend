@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { RiAddLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import PropertyCard from "../components/PropertyCard";
@@ -63,9 +64,10 @@ export default function MyProperties(){
                 </MyPropertiesTab>
                 
                 <Button
+                    lefticon={<RiAddLine size={20}/>}
                     onClick={() => {handleCreatePropertyButton()}}
                 >
-                    +
+                    
                 </Button>
 
             </MyPropertiesTabsContainer>
