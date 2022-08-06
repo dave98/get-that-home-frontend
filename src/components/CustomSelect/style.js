@@ -8,6 +8,7 @@ export const CustomSelectInput = styled.select(
     function(){
       if(variant === "search" || variant === "tropical"){
         return {
+          width: "100%",
           height: 40,
           borderRadius: 8,
           backgroundColor: colors.background.light,
@@ -17,6 +18,7 @@ export const CustomSelectInput = styled.select(
         }
       }else{
         return {
+          width: "100%",
           border: "none",
           padding: "0.5rem 0",
         }
@@ -26,7 +28,7 @@ export const CustomSelectInput = styled.select(
 )
 
 export const SelectContainer = styled.div(
-  ({variant}) => (
+  ({variant, width}) => (
     function(){
       if(variant === "search"){
         return {}
@@ -34,20 +36,23 @@ export const SelectContainer = styled.div(
         return {
           display: "flex",
           flexDirection: "column",
-          gap: 4
+          gap: 4,
+          "@media(max-width: 750px)": {
+            width: "100%",
+          }
         }
       }else{
         return {
           display: "flex",
           flexDirection: "column",
-          width: "25%",
+          width: {width},
           borderRight: `1px solid ${colors.grays.light}`,
           padding: "0 0.5rem",
         }
       }
     }
   ), ({width}) => ({
-    width: width ? width : "",
+    minWidth: width ? width : "",
   })
 )
 

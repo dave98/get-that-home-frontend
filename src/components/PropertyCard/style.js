@@ -3,57 +3,58 @@ import { motion } from "framer-motion";
 import { colors } from "../../style";
 import { fonts, typography } from "../../style/typography";
 
-export const Container = styled(motion.div)`
-  background-color: ${colors.white};
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  border-radius: 8px;
-  width: 300px;
-  min-height: 360px;
-  height: fit-content;
-  cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-`;
-export const CardImg = styled.div`
-  ${({ cover }) =>
-    cover
-      ? `background-image: url(${cover});`
-      : `background-image: url(/buildings.svg);`}
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: ${colors.grays.shallow};
-  display: flex;
-  justify-content: flex-end;
-  border-radius: 8px 8px 0 0;
-  width: 300px;
-  height: 200px;
-`;
-export const CardLabel = styled.div`
-  font-family: ${fonts.primary};
-  background-color: ${(props) =>
-    props.type === "rental" ? `${colors.blues.light}` : `${colors.blues.dark}`};
-  ${typography.body.xs}
-  ${typography.weight[400]}
-  color: ${colors.white};
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  gap: 0.5rem;
-  border-radius: 0 8px 0 0;
-  width: 110px;
-  height: 28px;
-`;
+export const Container = styled(motion.div)({
+  backgroundColor: "#13315C",
+  opacity: 0.6,
+  backgroundSize: "20px 20px",
+  backgroundImage: "repeating-linear-gradient(45deg, #ffffff 0, #ffffff 2px, #13315C 0, #13315C 50%)",
+  display: "flex",
+  position: "relative",
+  flexDirection: "column",
+  width: 300,
+  minWidth: 300,
+  maxWidth: 300,
+  //minHeight: 360,
+  cursor: "pointer",
+  //boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
+})
 
-export const CardHeaderContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 0.6rem;
-  padding: 0 11px;
-`;
+export const CardImg = styled.div(({cover}) => ({
+  backgroundImage: cover ? `url(${cover})` : "url(/buildings.svg)",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  backgroundColor: colors.grays.shallow,
+  display: "flex",
+  justifyContent: "flex-end",
+  width: 300,
+  height: 200,
+}))
+
+export const CardLabel = styled.div(({type}) => ({
+  fontFamily: fonts.primary,
+  backgroundColor: type === "rental" ? colors.blues.light : colors.blues.dark,
+  fontSize: 14, 
+  lineHeight: "20px",
+  fontWeight: 400,
+  color: colors.white,
+  padding: "0.5rem",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: "0.5rem",
+  width: 110,
+  height: 28,
+}))
+
+export const CardHeaderContainer = styled.div({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginTop: "0.6rem",
+  padding: "10px 15px",
+  backgroundColor: "#fff",
+})
 
 export const CardCost = styled.div`
   display: flex;
@@ -84,10 +85,12 @@ export const CardAddress = styled.p({
   fontWeight: 400,
   color: colors.grays.dark,
   textAlign: "left",
-  padding: "0 0.5rem",
+  padding: "0 15px",
   height: 72,
   maxHeight: 72,
   overflowY: "scroll",
+  backgroundColor: "#fff",
+  
   "::-webkit-scrollbar": {
     width: "5px",    
   },
@@ -102,6 +105,12 @@ export const CardAddress = styled.p({
   }
 })
 
+export const CardFooter = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: "#fff",
+  borderBottom: `2px solid ${colors.grays.dark}`
+})
 
 export const CardFooterInfo = styled.div`
   display: flex;
@@ -122,22 +131,12 @@ export const FooterInfo = styled(motion.div)`
   gap: 4px;
 `;
 
-export const CardFooter = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-`;
-
-export const MutableBottom = styled.div`
-  display: flex;
-  justify-content: space-around;
-  min-height: 7px;
-  background-color: ${colors.blues.dark};
-  border-radius: 0 0 8px 8px;
-  width: 100%;
-  height: fit-content;
-  color: ${colors.white};
-  ${({ owned }) => (owned ? `padding: 12px` : `padding: 0`)}
-  justify-content: center;
-`;
-
+export const MutableBottom = styled.div(({owned}) => ({
+  display: "flex",
+  justifyContent: "space-around",
+  minHeight: 7,
+  backgroundColor: colors.blues.dark,
+  width: "100%",
+  color: colors.white,
+  padding: owned ? 12 : 0,
+}))

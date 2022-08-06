@@ -1,7 +1,20 @@
 import { useEffect, useRef } from "react";
 import { TextInputContainer, TextInputFooter, TextInputMainContainer, TextInputMainLabel, TextInputText } from "./styles";
 
-export default function CustomText({name, label, value, onChange, placeholder, error, footer, isTouched,  onBlur, ...props}){
+export default function CustomText({
+    name, 
+    label, 
+    value, 
+    onChange, 
+    placeholder, 
+    error, 
+    footer, 
+    isTouched,  
+    onBlur, 
+    initial,
+    variants,
+    ...props
+}){
     const textAreaRef = useRef(null);
 
     useEffect(() => {
@@ -13,7 +26,11 @@ export default function CustomText({name, label, value, onChange, placeholder, e
     }, [value])
 
     return (
-        <TextInputMainContainer>
+        <TextInputMainContainer
+            initial={initial ? initial : null}
+            variants={variants ? variants : null}
+            animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+        >
             { label && <TextInputMainLabel>{label}</TextInputMainLabel> }
             <TextInputContainer>
                 <TextInputText 

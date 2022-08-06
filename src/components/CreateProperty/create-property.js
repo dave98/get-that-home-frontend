@@ -125,6 +125,30 @@ export default function CreatePropertyForm(){
         }
     }
 
+    function obtainAnitmationInitials(index = 0, direction="left") {
+        return {
+            x: direction == "left" ? -40 : 40,
+            opacity: index ? 0 : 1,
+        }
+    } 
+
+    function obtainAnimation(index = 0, hovered = false, tapped = false){
+        return {
+            active: {
+                x: 0,
+                opacity: 1, 
+                transition: { delay: index ? (index * 0.15) : 0}
+            },
+            hovering: {
+                scale: hovered ? 1.02 : 1,
+            },
+            tapping: {
+                scale: tapped ? 1.05 : 1,
+                transition: { delay: 0 }
+            }
+        }
+    }
+
     return (
         <Formik
             initialValues={initialValues}
@@ -134,13 +158,23 @@ export default function CreatePropertyForm(){
         {({ handleSubmit, handleChange, handleBlur, values, errors, touched, isValid, setFieldValue}) =>  (
                     <CreatePropertyFormContainer
                         onSubmit={handleSubmit}
-                        initial={{x: -30, opacity: 0}}
-                        animate={{x: 0, opacity: 1}}
+                        //initial={{x: -30, opacity: 0}}
+                        //animate={{x: 0, opacity: 1}}
                     >
                         {
                             currentOperation == "create"
-                                ? <CreatePropertyFormTitle>Create a property thing</CreatePropertyFormTitle>
-                                :  <CreatePropertyFormTitle>Edit a property thing</CreatePropertyFormTitle>
+                                ? 
+                                    <CreatePropertyFormTitle
+                                        initial={obtainAnitmationInitials(1)}
+                                        variants={obtainAnimation(1)}
+                                        animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+                                    >Create a property thing</CreatePropertyFormTitle>
+                                :  
+                                    <CreatePropertyFormTitle
+                                        initial={obtainAnitmationInitials(1)}
+                                        variants={obtainAnimation(1)}
+                                        animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+                                    >Edit a property thing</CreatePropertyFormTitle>
                         }
                         
                         <CustomRadio
@@ -152,6 +186,8 @@ export default function CreatePropertyForm(){
                             onBlur={handleBlur}
                             error={errors.operationType}
                             errorDirection="row"
+                            initial={obtainAnitmationInitials(2)}
+                            variants={obtainAnimation(2)}
                         />
                         
                         <CustomInput
@@ -166,6 +202,8 @@ export default function CreatePropertyForm(){
                             isTouched={touched.address}
                             error={errors.address}
                             errorDirection="row"
+                            initial={obtainAnitmationInitials(3)}
+                            variants={obtainAnimation(3)}
                         />
                         <CustomInput
                             type="number"
@@ -179,6 +217,8 @@ export default function CreatePropertyForm(){
                             isTouched={touched.rentAmount}
                             error={errors.rentAmount}
                             errorDirection="row" 
+                            initial={obtainAnitmationInitials(4)}
+                            variants={obtainAnimation(4)}
                         />
                         <CustomInput
                             type="number"
@@ -192,6 +232,8 @@ export default function CreatePropertyForm(){
                             isTouched={touched.maintenance}
                             error={errors.maintenance}
                             errorDirection="row"
+                            initial={obtainAnitmationInitials(5)}
+                            variants={obtainAnimation(5)}
                         />
                         <CustomRadio 
                             mainLabel="PROPERTY TYPE"
@@ -202,8 +244,14 @@ export default function CreatePropertyForm(){
                             onBlur={handleBlur}
                             error={errors.propertyType}
                             errorDirection="row"
+                            initial={obtainAnitmationInitials(6)}
+                            variants={obtainAnimation(6)}
                         />
-                        <CreatePropertyFormPropertyConfigContainer>
+                        <CreatePropertyFormPropertyConfigContainer
+                            initial={obtainAnitmationInitials(7)}
+                            variants={obtainAnimation(7)}
+                            animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+                        >
                             <CustomSelect 
                                 variant={"tropical"} 
                                 label={"BEDROOMS"} 
@@ -243,12 +291,17 @@ export default function CreatePropertyForm(){
                                 value={values.petsAllowed}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                initial={obtainAnitmationInitials(8)}
+                                variants={obtainAnimation(8)}
                             />
 
-                            <CreatePropertyFormHelperText>
+                            <CreatePropertyFormHelperText
+                                initial={obtainAnitmationInitials(9, "right")}
+                                variants={obtainAnimation(9)}
+                                animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+                            >
                                 Allowing pets increase the likehood of renters liking the property by 9001%. It also makes you a better person.
                             </CreatePropertyFormHelperText>
-                            
                         </CreatePropertyFormPetsHelperTextContainer>
                         <CustomText 
                             name="about"
@@ -260,10 +313,20 @@ export default function CreatePropertyForm(){
                             onBlur={handleBlur}
                             isTouched={touched.about}
                             error={errors.about}
+                            initial={obtainAnitmationInitials(10)}
+                            variants={obtainAnimation(10)}
                         />
                         <CreatePropertyFormImageContainer>
-                            <CreatePropertyFormImageTitle>Photos</CreatePropertyFormImageTitle>
-                            <CreatePropertyFormImageInputContainer>
+                            <CreatePropertyFormImageTitle
+                                initial={obtainAnitmationInitials(11)}
+                                variants={obtainAnimation(11)}
+                                animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+                            >Photos</CreatePropertyFormImageTitle>
+                            <CreatePropertyFormImageInputContainer
+                                initial={obtainAnitmationInitials(12)}
+                                variants={obtainAnimation(12)}
+                                animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+                            >
                                 <CreatePropertyFormImageInputTitle>Upload as many photos as you want</CreatePropertyFormImageInputTitle>
                                 <CustomInput
                                     name="images"
@@ -281,7 +344,11 @@ export default function CreatePropertyForm(){
                                     error={errors.images}
                                 />
                             </CreatePropertyFormImageInputContainer>
-                            <CreatePropertyFormImageImagesContainer>
+                            <CreatePropertyFormImageImagesContainer
+                                initial={obtainAnitmationInitials(13)}
+                                variants={obtainAnimation(13)}
+                                animate={"active"} whileHover={"hovering"} whileTap={"tapping"}
+                            >
                                     {
                                         imagesPreview.length
                                             ? imagesPreview.map((image, index) => {

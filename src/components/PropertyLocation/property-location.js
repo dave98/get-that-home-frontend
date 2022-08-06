@@ -42,8 +42,8 @@ const PropertyLocation = ({ zoom, location, country }) => {
       <Text>{location}</Text>
       <GoogleMap
         mapContainerStyle={{
-          height: "760px",
-          width: "760px",
+          height: "100%",
+          width: "100%",
           borderRadius: "10px",
           marginBottom: "1rem",
         }}

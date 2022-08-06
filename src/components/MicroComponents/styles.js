@@ -6,10 +6,11 @@ import { colors, typography } from "../../style";
 import { fonts } from "../../style/typography";
 
 // Custom input styles.
-export const SurrounderInputContainer = styled.div({
+export const SurrounderInputContainer = styled(motion.div)({
   display: "flex",
   flexDirection: "column",
   gap: 4,
+  width: "100%",
 }, ({type}) => (
   function(){
     if(type === "file"){
@@ -34,6 +35,9 @@ export const ErrorContainer = styled.div({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
+        "@media(max-width: 750px)": {
+          flexDirection: "column",
+        }
       }
     }else{
       return {
@@ -44,20 +48,20 @@ export const ErrorContainer = styled.div({
   }
 ))
 
-export const CustomInputContainer = styled.div({
+export const CustomInputContainer = styled.div(({width}) => ({
   display: "flex",
   flexDirection: "row",
   alignItems: "flex-start",
   gap: 10,
   justifyContent: "center" ,
   height: 40, 
-  width: 300,
+  width: width,
   borderRadius: 8,
   backgroundColor: colors.background.light,
   border: `1px solid ${colors.blues.regular}`,
   color: colors.grays.dark,
   padding: "0.5rem"
-})
+}))
 
 export const CustomInputLabel = styled.label(`
   color: ${colors.grays.dark}
@@ -98,9 +102,11 @@ export const CustomErrorMessage = styled.p`
 `
 
 // Radio input styles
-export const RadioInputMainContainer = styled.div({
+export const RadioInputMainContainer = styled(motion.div)({
   display: "flex",
   flexDirection: "column",
+  width: "100%",
+  justifyContent: "flex-start",
   gap: 6,
 })
 
@@ -153,7 +159,7 @@ export const RadioInputLabel = styled.label({
 })
 
 // Text input styles
-export const TextInputMainContainer = styled.div({
+export const TextInputMainContainer = styled(motion.div)({
   display: "flex",
   flexDirection: "column",
   gap: 4,
@@ -187,15 +193,20 @@ export const TextInputFooter = styled.p(`
 `)
 
 // PaginationButtonsComponent
-export const PaginationButtonsWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  padding-bottom: 2rem;
-  gap: 0.5rem;
-  justify-content: center;
-`;
+export const PaginationButtonsWrapper = styled.div({
+  width: "100%",
+  display: "flex",
+  paddingBottom: "2rem",
+  justifyContent: "center",
+  gap: "0.5rem",
+  backgroundColor: colors.white,
+  padding: "20px 20px",
+  position: "fixed",
+  left: 0,
+  right: 0, 
+  bottom: 0,
+  overflowX: "scroll",
+})
 
 export const PaginationButton = styled.button`
   width: 31px;

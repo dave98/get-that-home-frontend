@@ -17,15 +17,29 @@ import MySavedProperties from "./pages/my-saved-properties";
 import Profile from "./pages/profile-page";
 // import ShowProperty from "./pages/show-property-page";
 
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-height: 100vh;
-  max-width: 100vw;
-  overflow: hidden;
-  scroll-behavior: smooth;
-`;
+// const MainWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   position: relative;
+//   min-height: 100vh;
+//   max-width: 100vw;
+//   overflow: hidden;
+//   scroll-behavior: smooth;
+//   justify-content: center;
+//   items-align: center;
+// `;
+
+const MainWrapper = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  position: "relative",
+  minHeight: "100vh",
+  maxWidth: "100vw",
+  overflow: "hidden",
+  scrollBehavior: "smooth",
+  justifyContent: "center",
+  alignItems: "center",
+})
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);

@@ -5,14 +5,18 @@ import {
   ButtonsContainer,
   PropertyList,
   FindHomeInputContainer,
+  BackgroundImage,
+  TopHead,
+  TopCenter,
+  TopCenterDisplayer,
 } from "./pages-styles";
 import PlacesAutocomplete from "react-places-autocomplete";
 import scriptLoader from "react-async-script-loader";
-import { RiSearchLine } from "react-icons/ri";
+import { RiArrowDownLine, RiArrowUpLine, RiSearchLine } from "react-icons/ri";
 import { FaChevronDown } from "react-icons/fa";
 import Button from "../components/Button/button";
 import CustomSelect from "../components/CustomSelect/custom-select";
-import { Heading } from "../components/typography";
+import { Heading, Text } from "../components/typography";
 import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import PaginationButtons from "../components/MicroComponents/pagination-buttons";
@@ -21,6 +25,7 @@ import { useIndividualProperty } from "../contexts/individual-property-context";
 import FilterModal from "../components/FiltersModal/filters-modal";
 import { getFilteredProperties } from "../services/properties-service";
 import { SugestionsItem, SugestionsWrapper } from "../components/Hero/style";
+import { colors } from "../style";
 
 const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
   const { showProperty } = useIndividualProperty();
@@ -42,6 +47,9 @@ const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
   const [typeOfModal, setTypeOfModal] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [clearFilters, setClearFilters] = useState(false);
+  // Css functionality hooks
+  const [displayedFilters, setDisplayedFilters] = useState(false)
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -86,104 +94,127 @@ const ListProperties = ({ isScriptLoaded, isScriptLoadSucceed }) => {
     setIsOpen(false);
   };
 
+  function handlingDisplayingFilters(){
+    setDisplayedFilters(!displayedFilters);
+  }
+
   if (isScriptLoaded && isScriptLoadSucceed) {
     return (
       <ListPropertiesWrapper>
+        <BackgroundImage/>
         <FiltersHead>
-          <PlacesAutocomplete
-            value={filters.address}
-            onChange={(address) => setFilters({ ...filters, address })}
-            onSelect={(address) => setFilters({ ...filters, address })}
-          >
-            {({
-              getInputProps,
-              suggestions,
-              getSuggestionItemProps,
-              loading,
-            }) => (
-              <FindHomeInputContainer>
-                <CustomInput
-                  name="search"
-                  placeholder="Find a place you like"
-                  icon={<RiSearchLine size={22} />}
-                  {...getInputProps({
-                    placeholder: "Find a place you like",
-                  })}
-                />
-                <SugestionsWrapper>
-                  {loading && <div>Loading...</div>}
-                  {suggestions.map((suggestion, i) => {
-                    return (
-                      <SugestionsItem
-                        key={`${i}-itemID`}
-                        {...getSuggestionItemProps(suggestion)}
-                      >
-                        {suggestion.description}
-                      </SugestionsItem>
-                    );
-                  })}
-                </SugestionsWrapper>
-              </FindHomeInputContainer>
-            )}
-          </PlacesAutocomplete>
-          <ButtonsContainer>
-            <Button
-              onClick={() => {
-                setTypeOfModal("price");
-                setIsOpen(!isOpen);
-              }}
+          <TopHead>
+            <PlacesAutocomplete
+              value={filters.address}
+              onChange={(address) => setFilters({ ...filters, address })}
+              onSelect={(address) => setFilters({ ...filters, address })}
             >
-              PRICE
-            </Button>
-            <Button
-              onClick={() => {
-                setTypeOfModal("propertyType");
-                setIsOpen(!isOpen);
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <FindHomeInputContainer>
+                  <CustomInput
+                    name="search"
+                    placeholder="Find a place you like"
+                    icon={<RiSearchLine size={22} />}
+                    width={"auto"}
+                    {...getInputProps({
+                      placeholder: "Find a place you like",
+                    })}
+                  />
+                  <SugestionsWrapper>
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion, i) => {
+                      return (
+                        <SugestionsItem
+                          key={`${i}-itemID`}
+                          {...getSuggestionItemProps(suggestion)}
+                        >
+                          {suggestion.description}
+                        </SugestionsItem>
+                      );
+                    })}
+                  </SugestionsWrapper>
+                </FindHomeInputContainer>
+              )}
+            </PlacesAutocomplete>
+            
+            <CustomSelect
+              variant="search"
+              options={["Buying & Renting", "Buying", "Renting"]}
+              placeholder="Transaction Type"
+              name="transactionType"
+              value={filters.transactionType}
+              onChange={(e) => {
+                setFilters({
+                  ...filters,
+                  transactionType: e.target.value === "Buying" ? "sale" : "rent",
+                });
               }}
+              width={220}
+            />
+          </TopHead>
+          <TopCenter className={displayedFilters ? "active" : null}>
+            <ButtonsContainer className={displayedFilters ? "active" : null}>
+              <Button
+                onClick={() => {
+                  setTypeOfModal("price");
+                  setIsOpen(!isOpen);
+                }}
+              >
+                PRICE
+              </Button>
+              <Button
+                onClick={() => {
+                  setTypeOfModal("propertyType");
+                  setIsOpen(!isOpen);
+                }}
+              >
+                PROPERTY TYPE
+              </Button>
+              <Button
+                onClick={() => {
+                  setTypeOfModal("beds");
+                  setIsOpen(!isOpen);
+                }}
+              >
+                BEDS & BATHS
+              </Button>
+              <Button
+                righticon={<FaChevronDown />}
+                onClick={() => {
+                  setTypeOfModal("more");
+                  setIsOpen(!isOpen);
+                }}
+              >
+                MORE
+              </Button>
+              <Button
+                buttontype={"line"}
+                onClick={() => {
+                  setClearFilters(true);
+                }}
+              >
+                CLEAR FILTERS
+              </Button>
+            </ButtonsContainer>
+          </TopCenter>
+          
+          <TopCenterDisplayer>
+            <Button 
+              lefticon={ displayedFilters ? <RiArrowUpLine/> : <RiArrowDownLine/> }
+              buttontype="line"
+              width="100%"
+              righticon={displayedFilters ? <RiArrowUpLine/> : <RiArrowDownLine/> }
+              onClick={handlingDisplayingFilters}
             >
-              PROPERTY TYPE
+              DISPLAY FILTERS
             </Button>
-            <Button
-              onClick={() => {
-                setTypeOfModal("beds");
-                setIsOpen(!isOpen);
-              }}
-            >
-              BEDS & BATHS
-            </Button>
-            <Button
-              righticon={<FaChevronDown />}
-              onClick={() => {
-                setTypeOfModal("more");
-                setIsOpen(!isOpen);
-              }}
-            >
-              MORE
-            </Button>
-            <Button
-              buttontype={"line"}
-              onClick={() => {
-                setClearFilters(true);
-              }}
-            >
-              CLEAR FILTERS
-            </Button>
-          </ButtonsContainer>
-          <CustomSelect
-            variant="search"
-            options={["Buying & Renting", "Buying", "Renting"]}
-            placeholder="Transaction Type"
-            name="transactionType"
-            value={filters.transactionType}
-            onChange={(e) => {
-              setFilters({
-                ...filters,
-                transactionType: e.target.value === "Buying" ? "sale" : "rent",
-              });
-            }}
-          />
+          </TopCenterDisplayer>
         </FiltersHead>
-
         <FilterModal
           open={isOpen}
           onClose={handleClose}

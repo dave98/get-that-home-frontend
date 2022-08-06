@@ -11,6 +11,9 @@ export const ButtonIconContainer = styled(motion.div)(({radius}) => ({
     borderRadius: "50%",
     position: "relative",
     textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
 }))
 
 export const ButtonIconImage = styled(motion.img)({
